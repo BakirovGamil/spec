@@ -1,0 +1,35 @@
+.container {
+    --width: 18px;
+    --height: 18px;
+    width: var(--width);
+    height: var(--height);
+    position: relative;
+}
+  
+.label {
+    --w-label: calc(var(--width) - 3px);
+    --h-label: calc(var(--height) - 3px);
+    border-radius: var(--height);
+    display: block;
+    position: absolute;
+    top: calc((var(--height) - var(--h-label)) / 2);
+    left: calc((var(--width) - var(--w-label)) / 2);
+    width: var(--w-label);
+    height: var(--h-label);
+    cursor: pointer;
+    background-color: var(--c-radio);
+}
+  
+.input {
+    display: none;
+}
+  
+.input:checked ~ .label{
+    --w-label-checked: calc(var(--w-label) + 2px);
+    --h-label-checked: calc(var(--h-label) + 2px);
+    background-color: var(--c-radio-checked);
+    width: var(--w-label-checked);
+    height: var(--h-label-checked);
+    top: calc((var(--height) - var(--h-label-checked)) / 2);
+    left: calc((var(--width) - var(--w-label-checked)) / 2);
+}

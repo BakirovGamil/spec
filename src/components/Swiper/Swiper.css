@@ -1,0 +1,29 @@
+.swiper {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+}
+
+.swiper-wrapper {
+    display: flex;
+    user-select: none;
+    width: 100%;
+    height: 100%;
+    margin: 0 0 10px 0;
+}
+
+.slide {
+    min-width: 100%;
+}
+
+.slide img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+.swiper__pagination {
+    display: flex;
+    justify-content: center;
+}

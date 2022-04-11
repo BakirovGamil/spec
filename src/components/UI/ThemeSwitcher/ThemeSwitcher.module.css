@@ -1,0 +1,61 @@
+.switch {
+    --switch-width: 60px;
+    --switch-height: 30px;
+    --switch-r-w: 24px;
+}
+
+.cmn-toggle {
+    position: absolute;
+    margin-left: -9999px;
+    visibility: hidden;
+}
+
+.cmn-toggle + label {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+    user-select: none;
+}
+
+input.cmn-toggle-round-flat + label {
+    padding: 2px;
+    width: var(--switch-width);
+    height: var(--switch-height);
+    background-color: #dddddd;
+    border-radius: var(--switch-height);;
+    transition: background var(--trans-dur);
+}
+input.cmn-toggle-round-flat + label:before,
+input.cmn-toggle-round-flat + label:after {
+    display: block;
+    position: absolute;
+    content: "";
+}
+input.cmn-toggle-round-flat + label:before {
+    top: 2px;
+    left: 2px;
+    bottom: 2px;
+    right: 2px;
+    background-color: var(--c-bg);
+    border-radius: var(--switch-height);
+    transition: background var(--trans-dur);
+}
+input.cmn-toggle-round-flat + label:after {
+    top: calc((var(--switch-height) - var(--switch-r-w)) / 2);
+    left: 4px;
+    width: var(--switch-r-w);
+    height: var(--switch-r-w);
+    border-radius: var(--switch-r-w);
+    transition: margin var(--trans-dur), background var(--trans-dur);
+    background-color: rgb(105, 105, 105);
+    box-shadow: 0 0 8px rgb(105, 105, 105);
+}
+input.cmn-toggle-round-flat:checked + label {
+    background-color: #fff;
+}
+input.cmn-toggle-round-flat:checked + label:after {
+    margin-left: calc(var(--switch-width) - var(--switch-r-w) - 8.5px);
+    background-color: rgb(189,208,228);
+    box-shadow: 0 0 8px rgb(189,208,228);
+}
