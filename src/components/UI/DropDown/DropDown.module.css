@@ -1,0 +1,28 @@
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+  
+.dropdown__content {
+    border-radius: 5px;
+    overflow: hidden;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 200px;
+    max-height: 0;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    transition: max-height 0.4s;
+}
+  
+.dropdown__content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+  
+.dropdown__content a:hover {background-color: #ddd}
+  
+.show {max-height: 150px}

@@ -1,16 +1,16 @@
-import { useEffect, useState } from "react";
+import { useMemo, useState, useId } from "react";
 import cls from "./ThemeSwitcher.module.css"
 
 function ThemeSwitcher({className, ...props}) {
-    const id = useState(Math.random());
+    const id = useId();
     const [checked, setChecked] = useState(false);
     const classNameCat = className ? [cls["switch"], className].join(' ') : cls["switch"];
 
-    useEffect(() => {
+    useMemo(() => {
         const theme = window.localStorage.getItem('theme'); // если пусто, то null
         
         changeTheme(theme);
-    }, []);
+    }, [checked]);
 
     function changeTheme(theme) {
         document.body.className = "";
@@ -50,13 +50,13 @@ function ThemeSwitcher({className, ...props}) {
     return (
         <div className={classNameCat}>
             <input 
-                id={id[0]} 
+                id={id} 
                 checked={checked} 
                 onChange={handleChange}
                 className={[cls["cmn-toggle"], cls["cmn-toggle-round-flat"]].join(" ")} 
                 type="checkbox"
             />
-            <label htmlFor={id[0]}></label>
+            <label htmlFor={id}></label>
         </div>
     );
 }

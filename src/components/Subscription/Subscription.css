@@ -1,0 +1,41 @@
+.subscription {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--c-bg-2);
+  border-radius: 12px;
+  box-shadow: 0 0 10px -5px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  color: white;
+  width: 275px;
+  height: 410px;
+  padding: 34px 20px 20px;
+  line-height: 32px;
+}
+
+.subscription__title {
+  font-size: 28px;
+  flex: 1 1 auto;
+  font-family: "Arial";
+}
+
+.subscription__text {
+  font-size: 15px;
+  margin: 0 0 10px 0;
+  line-height: 22px;
+}
+
+.subscription__button {
+  width: 100%;
+  height: 52px;
+  padding: 0 20px;
+  background-color: white;
+  color: transparent;
+  border-radius: 30px;
+  font-size: 15px;
+}
+
+.subscription__button:hover {
+  background-color: white;
+}

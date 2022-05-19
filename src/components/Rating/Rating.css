@@ -1,0 +1,60 @@
+.rating {
+	display: flex;
+	align-items: center;
+	flex-direction: row-reverse;
+	justify-content: space-between;
+	width: 100px;
+}
+
+.rating input {
+	display: none;
+}
+
+.rating label {
+	display: inline-block;
+	position: relative;
+	width: 20px;
+	height: 20px;
+}
+
+.rating label[data-isDisabled=false] {
+	cursor: pointer;
+}
+
+.rating input:checked ~ label .star::before{
+	background-color: rgb(255, 175, 0);
+}
+
+.rating label[data-isDisabled=false]:hover .star,
+.rating label[data-isDisabled=false]:hover .star::before,
+.rating label[data-isDisabled=false]:hover ~ label > .star,
+.rating label[data-isDisabled=false]:hover ~ label > .star::before
+{
+	background-color: rgb(255, 210, 0)!important;
+}
+
+/* Определения стиля звезды */
+.star {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	background-color: rgb(255, 175, 0);
+	clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+	position: relative;
+}
+
+.star::before {
+	content: '';
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	bottom: 5px;
+	right: 5px;
+	background: var(--c-bg);
+	z-index: 1;
+}
+
+.star,
+.star:before {
+	clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}

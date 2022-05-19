@@ -1,0 +1,62 @@
+:root {
+    --h-i: 35px;
+    --s-f: 18px;
+}
+
+.container {
+    position: relative;
+    font-size: var(--s-f);
+    height: calc(var(--h-i) + 17px + 1px);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.label, .input {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    top: 17px;
+}
+
+.label {
+    opacity: 0.8;
+    user-select: none;
+    cursor: text;
+    height: var(--h-i);
+    transition: top 0.2s, font-size 0.2s;
+    left: 10px;
+    top: 24px;
+}
+
+.input {
+    background-color: var(--c-bg);
+    color: var(--c-t);
+    height: var(--h-i);
+    font-size: var(--s-f);
+    padding: 6px 10px 7px 10px;
+    border-radius: 5px;
+    letter-spacing: 1px;
+}
+
+.input:focus + .label, .input:not(:placeholder-shown) + .label {
+    top: 0;
+    font-size: 16px;
+    height: 17px;
+}
+
+.line {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--c-bg-line);
+}
+
+.input:focus ~ .line {
+    background-color: rgb(0, 90, 255);
+}
+
+.input:not(:placeholder-shown) ~ .line {
+    background-color: rgb(0, 210, 100);
+}

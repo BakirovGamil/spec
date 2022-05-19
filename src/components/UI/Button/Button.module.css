@@ -1,0 +1,9 @@
+.btn {
+    font-family: "Exo 2";
+    padding: 5px 20px 7px 20px;
+    border-radius: 10px;
+}
+
+.btn:hover {
+    background-color: var(--c-hover);
+}

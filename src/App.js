@@ -1,43 +1,54 @@
 import './null.css';
 import './main.css';
-import Header from "./components/Header/Header"
-import Swiper from './components/Swiper/Swiper';
-import Slide from "./components/Swiper/Slide";
+import { Route, Routes } from 'react-router-dom';
+import Meet from "./pages/Meet/Meet"
+import { createRef, useEffect } from 'react';
+import Main from './pages/Main';
+import Authorization from './pages/Authorization/Authorization';
+import Login from './pages/Login/Login';
+import ProfileId from './pages/ProfileId/ProfileId';
 
 function App() {
-  return (
-    <div className='wrapper'>
-        <Header/>
-        <main className="main">
-          <div className="container">
-			<Swiper>
-				<Slide>
-					<img onDragStart={(e) => e.preventDefault()} src="https://avatars.mds.yandex.net/get-zen_doc/5233619/pub_610cf99265c5547a17feb186_610cfa89bdb1f83a60f41c08/scale_1200" alt="" />
-				</Slide>
-				<Slide>
-					<img onDragStart={(e) => e.preventDefault()} src="https://krot.info/uploads/posts/2022-01/1642900976_3-krot-info-p-sportkari-4.jpg" alt="" />
-				</Slide>
-				<Slide>
-					<img onDragStart={(e) => e.preventDefault()} src="https://img.fonwall.ru/o/96/lamborjdini-tyuning-sportkar-kupe.jpg?route=mid&amp;h=750" alt="" />
-				</Slide>
-        <Slide>
-					<img onDragStart={(e) => e.preventDefault()} src="https://img.fonwall.ru/o/96/lamborjdini-tyuning-sportkar-kupe.jpg?route=mid&amp;h=750" alt="" />
-				</Slide>
-        <Slide>
-					<img onDragStart={(e) => e.preventDefault()} src="https://img.fonwall.ru/o/96/lamborjdini-tyuning-sportkar-kupe.jpg?route=mid&amp;h=750" alt="" />
-				</Slide>
-			</Swiper>
-          </div>
-        </main>
-        <footer className="footer">
-          <div className="container">
-            <div className='footer__author'>
-              © Бакиров Гамил {(new Date()).getFullYear()}
-            </div>
-          </div>
-        </footer>
-    </div>
-  );
+	const wrapperRef = createRef();
+
+	useEffect(() => {
+		const theme = window.localStorage.getItem('theme'); // если пусто, то null
+
+		changeTheme(theme);
+	}, []);
+
+	function changeTheme(theme) {
+		document.body.className = "";
+		switch(theme) {
+			case 'light':
+				document.body.classList.add('light');
+				break;
+			case 'dark':
+				document.body.classList.add('dark');
+				break;
+			default: 
+				const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+				if(isDark) {
+					document.body.classList.add('dark');
+					break;
+				}
+
+				document.body.classList.add('light');
+				break;
+		}
+	}
+
+	return (
+		<div className='wrapper' ref={wrapperRef}>
+			<Routes>
+				<Route path="/" element={<Main />} />
+				<Route path="meet" element={<Meet />} />
+				<Route path="authorization" element={<Authorization />} />
+				<Route path="login" element={<Login />} />
+				<Route path="profile" element={<ProfileId />} />
+			</Routes>
+		</div>
+	);
 }
 
 export default App;

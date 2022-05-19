@@ -1,7 +1,7 @@
 .switch {
-    --switch-width: 60px;
-    --switch-height: 30px;
-    --switch-r-w: 24px;
+    --switch-width: 50px;
+    --switch-height: 25px;
+    --switch-r-w: 18px;
 }
 
 .cmn-toggle {

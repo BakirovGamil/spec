@@ -1,0 +1,47 @@
+.info {
+    display: inline-block;
+    font-size: 16px;
+    position: relative;
+    margin: 0 0 -5px 0;
+}
+
+.text {
+    cursor: pointer;
+    display: flex;
+    align-items: flex-end;
+    border-radius: 5px;
+    padding: 3px 10px;
+    transition: none;
+    margin: 0 0 5px 0;
+}
+
+.info:hover > .text {
+    background-color: var(--c-hover);
+}
+
+.data {
+    padding: 3px 0;
+    margin: 0 3px 0 0;
+}
+
+.extra {
+    display: none;
+    font-size: 13px;
+    background-color: var(--c-bg-2);
+    border-radius: 5px;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, .1);;
+    padding: 15px;
+    position: absolute;
+    letter-spacing: 1px;
+    line-height: 17px;
+}
+
+
+.info:hover > .extra, .extra:hover {
+    display: inline-block;
+}
+
+.icon {
+    margin: 0 5px 0 0;
+    color: rgb(0, 150, 100);
+}

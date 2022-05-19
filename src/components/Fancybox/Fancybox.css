@@ -1,0 +1,26 @@
+.fancybox__container { 
+    display: flex;
+    flex-direction: row;
+}
+
+.fancybox__leftCol {
+    width: 80vw;
+    min-height: 1px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+}
+  
+.fancybox__rightCol {
+    width: 20vw;
+    height: 100%;
+    overflow: hidden;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--c-bg-2);
+    color: var(--c-t);
+    overflow-wrap: break-word;
+}

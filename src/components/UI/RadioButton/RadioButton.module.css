@@ -1,6 +1,6 @@
 .container {
-    --width: 18px;
-    --height: 18px;
+    --width: 15px;
+    --height: 15px;
     width: var(--width);
     height: var(--height);
     position: relative;

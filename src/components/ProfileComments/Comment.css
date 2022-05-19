@@ -1,0 +1,40 @@
+.comment {
+    display: flex;
+    position: relative;
+}
+
+.comment__left-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100px;
+    margin: 0 50px 0 0;
+}
+
+.comment__avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: purple;
+    color: wheat;
+}
+
+.comment__left-column > *,
+.comment__right-column > * {
+    margin: 0 0 10px 0;
+}
+
+.comment__left-column:last-child,
+.comment__right-column:last-child{
+    margin: 0;
+}
+
+.comment__date,
+.comment__services {
+    font-size: 0.85rem;
+    color: var(--c-t-2);
+}

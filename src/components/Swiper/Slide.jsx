@@ -1,6 +1,8 @@
-function Slide({children}) {
+function Slide({children, className}) {
+    const fullClassName = className ? [className, "slide"].join(" ") : "slide";
+    
     return (
-        <div className="slide">
+        <div className={fullClassName}>
             {children}
         </div>
     )

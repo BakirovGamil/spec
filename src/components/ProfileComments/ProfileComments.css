@@ -1,0 +1,17 @@
+.profile-comments__title {
+    margin: 0 0 25px 0;
+}
+
+.profile-comments__content > * {
+    padding: 15px 0;
+}
+
+.profile-comments__content > *::after {
+    content: '';
+    height: 1px;
+    width: 100%;
+    background-color: var(--c-hover);
+    position: absolute;
+    top: 0;
+    left: 0;
+}

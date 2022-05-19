@@ -1,23 +1,26 @@
 import { createRef, useEffect, useState } from "react";
 import "./Swiper.css"
 import RadioButton from "../UI/RadioButton/RadioButton"
+import Button from "../UI/Button/Button";
 
-function Swiper({children}) {
+function Swiper({children, isPagination, isButton, className}) {
     const [slideIndex, setSlideIndex] = useState(0);
     const swiperWrapperRef = createRef();
     const id = useState(Math.random());
+
     useEffect(() => {
-        window.onresize = () => changeSlide(slideIndex);
-        return () => window.onresize = "";
+        window.onresize = () => {
+            changeSlide(slideIndex);
+        }
     });
 
     function changeSlide(indx) {
         const swiperWrapper = swiperWrapperRef.current;
         const slideWidth = swiperWrapper.offsetWidth;
-        console.log(swiperWrapper);
         setSlideIndex(indx);
         swiperWrapper.style.transition = "transform 0.4s";
-        swiperWrapper.style.transform = `translate3d(${-indx * slideWidth}px, 0px, 0px)`
+
+        swiperWrapper.style.transform = `translate3d(${-indx * (slideWidth + 10)}px, 0px, 0px)`
     }
 
     function swipeStart(e) {
@@ -40,6 +43,7 @@ function Swiper({children}) {
         const trfRegExp = /[-0-9.]+(?=px)/;
         const transform = swiperWrapper.style.transform.match(trfRegExp);
         swiperWrapper.style.transition = "";
+        swiperWrapper.style.cursor = "grabbing";
 
         function movaAt(x) {
             swiperWrapper.style.transform = `translate3d(${x}px, 0px, 0px)`
@@ -69,6 +73,8 @@ function Swiper({children}) {
             document.removeEventListener("touchmove", swipeMove);
             document.removeEventListener("mouseup", swipeEnd);
             document.removeEventListener("touchend", swipeEnd);
+            
+            swiperWrapper.style.cursor = "grab";
         }
 
         document.addEventListener("mousemove", swipeMove);
@@ -77,16 +83,44 @@ function Swiper({children}) {
         document.addEventListener("touchend", swipeEnd);
     }
 
+    function setPrevSlide() {
+        let currentIndex = slideIndex;
+        if(currentIndex !== 0) currentIndex--;
+
+        changeSlide(currentIndex);
+    }
+
+    function setNextSlide() {
+        let currentIndex = slideIndex;
+        if(currentIndex !== children.length - 1) currentIndex++;
+
+        changeSlide(currentIndex);
+    }
+
     return (
-        <div className="swiper">
-            <div className="swiper-wrapper" ref={swiperWrapperRef} onMouseDown={swipeStart} onTouchStart={swipeStart}>
-                {children}
+        <div className={className ? [className, "swiper"].join(" ") : "swiper"}>
+            <div className="swiper__list">
+                <div className="swiper__wrapper" ref={swiperWrapperRef} onMouseDown={swipeStart} onTouchStart={swipeStart}>
+                    {children}
+                </div>
             </div>
-            <div className="swiper__pagination">
-                {children.map((slide, indx) => {
-                     return <RadioButton name={id[0]} key={indx} checked={slideIndex === indx} onChange={() => {changeSlide(indx)}}/>
-                })}
-            </div>
+            {
+                isPagination &&
+                <div className="swiper__pagination">
+                    {children.map((slide, indx) => {
+                        return <RadioButton name={id[0]} key={indx} checked={slideIndex === indx} onChange={() => {changeSlide(indx)}}/>
+                    })}
+                </div>
+            }
+            { isButton && <>
+                    {   !!slideIndex && 
+                        <Button onClick={setPrevSlide} className="swiper__prev"><i className="gg-chevron-left"></i></Button>
+                    }
+                    
+                    {   slideIndex !== children.length - 1 &&
+                        <Button onClick={setNextSlide} className="swiper__next"><i className="gg-chevron-right"></i></Button>
+                    }
+            </>}
         </div>
     );
 }
