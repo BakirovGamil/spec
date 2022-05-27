@@ -1,37 +1,11 @@
-import { useState } from "react";
 import Header from "../../components/Header/Header";
 import ProfileComments from "../../components/ProfileComments/ProfileComments";
 import ProfileInfo from "../../components/ProfileInfo/ProfileInfo";
 import ProfilePhoto from "../../components/ProfilePhoto/ProfilePhoto";
-import Button from "../../components/UI/Button/Button";
+import ProfileServices from "../../components/ProfileServices/ProfileServices";
 import "./ProfileId.css"
 
-const sections = [
-    {
-        id: 1,
-        name: "О специалисте",
-        element: <ProfileInfo/>
-    },
-    {
-        id: 2,
-        name: "Фото",
-        element: <ProfilePhoto/>
-    },
-    {
-        id: 3,
-        name: "Услуги",
-        element: <div>Услуги</div>
-    },
-    {
-        id: 4,
-        name: "Отзывы",
-        element: <ProfileComments/>
-    }
-];
-
 function Profile() {
-    const [selectedSection, setSelectedSection] = useState(sections[0]);
-
     return (<>
         <Header/>
         <main>
@@ -40,20 +14,23 @@ function Profile() {
                     <div className="profile__body">
                         <div className="profile__actions_fake"></div>
                         <div className="profile__actions">
-                            {sections.map((section) => {
-                                return (
-                                    <Button 
-                                        key={section.id} 
-                                        className={selectedSection === section ?  "profile__button profile__button_selected" : "profile__button"} 
-                                        onClick={() => setSelectedSection(section)}
-                                    >
-                                        {section.name}
-                                    </Button>
-                                );
-                            })}
+                            <a className="profile__button" href="#profile">О специалисте</a>
+                            <a className="profile__button" href="#photo">Фото</a>
+                            <a className="profile__button" href="#services">Услуги</a>
+                            <a className="profile__button" href="#comments">Отзывы</a>
                         </div>
                         <div className="profile__content">
-                            {selectedSection.element}
+                            <div id="profile"></div>
+                            <ProfileInfo className="profile-section"/>
+
+                            <div id="photo"></div>
+                            <ProfilePhoto className="profile-section"/>
+
+                            <div id="services"></div>
+                            <ProfileServices className="profile-section"/>
+
+                            <div id="comments"></div>
+                            <ProfileComments className="profile-section"/>
                         </div>
                     </div>
                 </div>

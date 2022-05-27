@@ -14,8 +14,11 @@ function Main() {
         <main className="main">
             <div className="container">
                 <Meet/>
-                <Rating/>
-                <Link to="profile">Пример профиля</Link>
+                <Rating name="rating"/>
+                <Link to="profile">Пример профиля</Link><br />
+                <Link to="profile/photos">Пример всех фоток профиля</Link><br />
+                <Link to="profile/comments">Пример всех отзывов профиля</Link><br />
+                <Link to="specialist/registration">Страница регистрации специалиста</Link><br />
             </div>
             <div className="test">
                 <div className="container">

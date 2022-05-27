@@ -1,0 +1,16 @@
+.ProfileServices__title {
+    margin: 0 0 25px 0;
+}
+
+.ProfileServices__service {
+    display: flex;
+    justify-content: space-between;
+}
+
+.ProfileServices__service {
+    margin: 0 0 15px 0;
+}
+
+.ProfileServices__service:last-child {
+    margin: 0;
+}

@@ -39,3 +39,19 @@
 .subscription__button:hover {
   background-color: white;
 }
+
+.subscription__img-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.subscription__img {
+  width: 150px;
+  height: 100px;
+}
+
+.subscription__img img {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+}

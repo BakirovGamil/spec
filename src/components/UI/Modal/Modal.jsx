@@ -14,12 +14,20 @@ function Modal({isVisible, title, setIsVisible, children}) {
 
         if(isVisible) {
             body.style.overflow = "hidden";
+
             body.style.paddingRight = scrollSize + "px";
             header.style.paddingRight = scrollSize + "px";
+            document.ontouchmove = function (e) {  // Запрет скролла для телефонов
+                e.preventDefault();
+            }
         } else {
             body.style.overflow = "auto";
+
             body.style.paddingRight = 0;
             header.style.paddingRight = 0;
+            document.ontouchmove = function (e) {
+                return true;
+            }
         }
     }, [isVisible]);
 

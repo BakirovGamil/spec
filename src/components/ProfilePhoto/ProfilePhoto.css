@@ -1,9 +1,51 @@
-.ProfilePhoto__body {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
+.ProfilePhoto {
+    cursor: pointer;
+}
+
+.ProfilePhoto .PrfoilePhoto__button {
+    background-color: var(--c-hover);
 }
 
 .ProfilePhoto__title {
     margin: 0 0 25px 0;
 }
+
+/* .ProfilePhoto__body {
+    height: 150px;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin: 0 0 15px 0;
+} */
+
+.ProfilePhoto__body {
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    column-gap: 12px;
+    row-gap: 100px;
+    justify-items: center;
+    height: 140px;
+    margin: 0 0 15px 0;
+}
+
+.ProfilePhoto__img {
+    width: 100%;
+    height: 100%;
+}
+
+.ProfilePhoto__img img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.PrfoilePhoto_action {
+    text-align: center;
+}
+
+/* @media (max-width: 600px) {
+    .ProfilePhoto__body {
+        height: 80px;
+    }
+} */

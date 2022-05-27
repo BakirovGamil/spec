@@ -1,0 +1,32 @@
+.comments__title {
+    padding: 10px 0;
+    margin: 0 0 20px 0;
+    text-align: center;
+}
+
+.comments__body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.comments__body > * {
+    position: relative;
+    margin: 0 0 20px 0;
+    padding: 10px 0;
+}
+
+.comments__body > *::after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    width: 100%;
+    height: 1px;
+    background-color: var(--c-hover);
+}
+
+.comments__body > *:last-child::after {
+    content: none;
+}

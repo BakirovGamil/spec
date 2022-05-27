@@ -1,0 +1,67 @@
+.ServiceList__service {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 0 15px 0;
+    transition: opacity var(--trans-dur);
+    z-index: 1;
+    position: relative;
+}
+
+.ServiceList__input {
+    border-radius: 5px;
+    padding: 6px 10px 7px 10px;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    font-size: 18px;
+    color: var(--c-t);
+    background-color: var(--c-bg);
+    margin: 0 7px 0 0;
+}
+
+.ServiceList__input:last-child {
+    margin: 0;
+}
+
+.ServiceList__name {
+    flex: 1 1 auto;
+}
+
+.ServiceList__price {
+    width: 100px;
+}
+
+.ServiceList__button {
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid var(--c-bg-line);
+    width: 38px;
+    height: 38px;
+}
+
+/* .ServiceList__button span{
+    outline: 1px solid white;
+} */
+
+.ServiceList__button:hover {
+    background: var(--c-hover-2);
+    color: black;
+}
+
+.ServiceList__newService {
+    opacity: 0.5;
+    animation: newService 0.4s;
+    z-index: 0;
+}
+
+@keyframes newService {
+    0% {
+        top: -30px;
+        opacity: 0;
+    }
+    100% {
+        top: 0;
+        opacity: 0.5;
+    }
+}

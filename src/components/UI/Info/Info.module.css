@@ -33,7 +33,8 @@
     padding: 15px;
     position: absolute;
     letter-spacing: 1px;
-    line-height: 17px;
+    line-height: 18px;
+    z-index: 1;
 }
 
 

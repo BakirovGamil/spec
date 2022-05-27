@@ -2,17 +2,16 @@
   --header-height: 54px;
   --footer-height: 50px;
   --trans-dur: 0.4s;
-  font-size: 20px;
+  scroll-behavior: smooth;
 }
 
 *,::after, ::before, :hover {
   transition: background var(--trans-dur);
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&display=swap');
 
 body.light {
-  --c-bg: rgb(235, 235, 235);
+  --c-bg: rgb(230, 230, 230);
   --c-bg-2: rgb(245, 245, 245);
   --c-bg-line: rgb(255, 174, 0);
   --c-header: rgb(255, 174, 0);
@@ -43,14 +42,20 @@ body.dark {
   --c-slider-button: rgba(34, 34, 38, 0.7);
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+
 body {
   background-color: var(--c-bg);
   color: var(--c-t);
-  font-family: "Exo 2";
-}
-
-body {
+  font-family: 'Nunito', sans-serif;
+  font-size: 20px;
+  line-height: 27px;
   transition: background var(--trans-dur), color var(--trans-dur);
+  /* background-image: url('../public/background.png');
+  background-position: top left;
+  background-size: 510px auto;
+  background-repeat: repeat;
+  backdrop-filter: blur(3px); */
 }
 
 html, body, #root, .wrapper {

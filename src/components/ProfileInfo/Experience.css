@@ -1,0 +1,20 @@
+.Experience > li {
+    margin: 0 0 10px 0;
+    position: relative;
+    padding: 0 0 0 15px;
+}
+
+.Experience > li:last-child {
+    margin: 0;
+}
+
+.Experience > li::after {
+    content: '';
+    display: inline-block;
+    background-color: var(--c-bg-line);
+    width: 7px;
+    height: 2px;
+    position: absolute;
+    top: calc(50% - 1px);
+    left: 0;
+}

@@ -34,6 +34,11 @@ function Subscription() {
                     Здоровый питомец
             </div>
             <div className="subscription__body">
+                <div className="subscription__img-container">
+                    <div className="subscription__img">
+                        <img src="https://c.tenor.com/O-Ard5UaYIkAAAAi/chubby-tonton.gif" alt="" />
+                    </div>
+                </div>
                 <div className="subscription__text">
                     <p>3 консультации (ветеринары)</p>
                     <p>Автопродление каждый месяц </p>

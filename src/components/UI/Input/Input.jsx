@@ -1,9 +1,9 @@
 import { useId } from 'react'
 import cls from "./Input.module.css";
 
-const invalidStyle = { 'background-color': 'rgb(200, 0, 0)'};
+const invalidStyle = { 'backgroundColor': 'rgb(200, 0, 0)'};
 
-function Input({className,  placeholder, isInvalid, value, ...props}) {
+function Input({className,  placeholder, isInvalid , value, ...props}) {
     const fullClassName = className ? [className, cls.container].join(" ") : cls.container;
     const id = useId(); 
 

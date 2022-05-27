@@ -7,6 +7,9 @@ import Main from './pages/Main';
 import Authorization from './pages/Authorization/Authorization';
 import Login from './pages/Login/Login';
 import ProfileId from './pages/ProfileId/ProfileId';
+import ProfilePhotos from './pages/ProfilePhotos/ProfilePhotos';
+import ProfileComments from './pages/ProfileComments/ProfileComments';
+import SpecialistRegistration from './pages/SpecialistRegistration/SpecialistRegistration';
 
 function App() {
 	const wrapperRef = createRef();
@@ -46,6 +49,9 @@ function App() {
 				<Route path="authorization" element={<Authorization />} />
 				<Route path="login" element={<Login />} />
 				<Route path="profile" element={<ProfileId />} />
+				<Route path="profile/photos" element={<ProfilePhotos />} />
+				<Route path="profile/comments" element={<ProfileComments />} />
+				<Route path="specialist/registration" element={<SpecialistRegistration />} />
 			</Routes>
 		</div>
 	);

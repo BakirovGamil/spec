@@ -1,4 +1,4 @@
-import { createRef, useEffect, useState } from "react";
+import { createRef, useEffect, useState, useId } from "react";
 import "./Swiper.css"
 import RadioButton from "../UI/RadioButton/RadioButton"
 import Button from "../UI/Button/Button";
@@ -6,12 +6,14 @@ import Button from "../UI/Button/Button";
 function Swiper({children, isPagination, isButton, className}) {
     const [slideIndex, setSlideIndex] = useState(0);
     const swiperWrapperRef = createRef();
-    const id = useState(Math.random());
+    const id = useId();
 
     useEffect(() => {
         window.onresize = () => {
             changeSlide(slideIndex);
         }
+
+        return () => window.onresize = "";
     });
 
     function changeSlide(indx) {
@@ -108,7 +110,7 @@ function Swiper({children, isPagination, isButton, className}) {
                 isPagination &&
                 <div className="swiper__pagination">
                     {children.map((slide, indx) => {
-                        return <RadioButton name={id[0]} key={indx} checked={slideIndex === indx} onChange={() => {changeSlide(indx)}}/>
+                        return <RadioButton name={id} key={indx} checked={slideIndex === indx} onChange={() => {changeSlide(indx)}}/>
                     })}
                 </div>
             }

@@ -15,3 +15,15 @@
     top: 0;
     left: 0;
 }
+
+.profile-comments__content > *:first-child::after {
+    content: none;
+}
+
+.profile-comments__action {
+    text-align: center;
+}
+
+.profile-comments__button {
+    background-color: var(--c-hover);
+}

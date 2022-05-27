@@ -5,7 +5,7 @@
     position: fixed;
     z-index: 100;
     top: 0;
-    transition: background var(--trans-dur), transform var(--trans-dur);
+    transition: background var(--trans-dur), top var(--trans-dur);
     box-shadow: 0 5px 5px -5px rgba(0, 0, 0, .5);
 }
 
@@ -68,6 +68,6 @@
     margin: 0 0 15px 0;
 }
 
-.header_hidden {
-    transform: translateY(-100%);
+.header.header_hidden {
+    top: -60px;
 }

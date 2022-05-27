@@ -1,10 +1,13 @@
+import Experience from "./Experience";
 import Button from "../UI/Button/Button";
 import Info from "../UI/Info/Info";
 import "./ProfileInfo.css";
 
-function ProfileInfo() {
+function ProfileInfo({className}) {
+    const classNameFull = className ? ["profile__info", className].join(" ") : "profile__info";
+
     return (
-        <div className="profile__info">
+        <div className={classNameFull}>
             <div className="profile__item profile__main">
                 <div className="profile__img">
                     <img src="profile.jpg" alt="Не удалось загрузить фотку"/>
@@ -48,14 +51,12 @@ function ProfileInfo() {
                 </div>
             </div>
 
-
             <div className="profile__item">
                 <div className="profile__title">
                     Опыт
                 </div>
                 <div className="profile__about">
-                    Опыт работыс 2006 г. (16 лет)
-                    На сервисе с ноября 2017 г. (4 года)
+                    <Experience/>
                 </div>
             </div>
         </div>

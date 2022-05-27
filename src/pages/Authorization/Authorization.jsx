@@ -62,11 +62,11 @@ function Authorization() {
     };
 
     const handleChangePhoneNumber = e => {
-        const regExp =  /[\d+()-]/g;
+        const regExp =  /[\d+]/g;
         const filteredValueArray = e.target.value.match(regExp);
         const newValue = filteredValueArray ? filteredValueArray.join("") : "";
         const lengthValue = newValue.length;
-        if(lengthValue <= 20) setUser({...user, phoneNumber: newValue});
+        if(lengthValue <= 12) setUser({...user, phoneNumber: newValue});
     };
 
     const handleFocusPhoneNumber = e => {

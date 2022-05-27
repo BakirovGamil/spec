@@ -1,24 +1,34 @@
-import "./header.css"
+import "./Header.css"
 import Logo from '../Logo';
 import ThemeSwitcher from "../UI/ThemeSwitcher/ThemeSwitcher";
 import { createRef, useEffect } from "react";
 import DropDown from "../UI/DropDown/DropDown";
 import { Link } from "react-router-dom";
 
+function getFullHeightOfDocument() {
+    return Math.max(
+        document.body.scrollHeight, document.documentElement.scrollHeight,
+        document.body.offsetHeight, document.documentElement.offsetHeight,
+        document.body.clientHeight, document.documentElement.clientHeight
+    );
+}
+
 function Header() {
     const headerRef = createRef();
     const fakeHeaderRef = createRef();
 
     useEffect(() => {
-        const fakeHeader = fakeHeaderRef.current;
         const header = headerRef.current;
 
         function changeHeaderBackground() {
-            const fakeHeaderRect = fakeHeader.getBoundingClientRect();
+            const currentScroll = window.pageYOffset;
+            const checkIsDropped = () => header.classList.contains("drop");
 
-            if(fakeHeaderRect.top <= -40) {
+            if(currentScroll >= 100 && !checkIsDropped()) {
                 header.classList.add("drop");
-            } else if(fakeHeaderRect.top >= -40){
+            }
+
+            if(currentScroll < 100 && checkIsDropped()){
                 header.classList.remove("drop");
             }
         }
@@ -26,10 +36,17 @@ function Header() {
         let prevScroll = window.pageYOffset;
         function changeHeaderVisibility() {
             const currentScroll = window.pageYOffset;
+            if(currentScroll >= getFullHeightOfDocument() - document.documentElement.clientHeight - 100) return;  //Если вышли за документ (На мобильных устройствах можно)
+            
+            if(currentScroll <= 100) return; //Чтобы алгоритм скрытия работал после 40 пикселей
 
-            if(currentScroll > prevScroll) {
+            const checkIsHidden = () => header.classList.contains("header_hidden");
+
+            if(currentScroll > prevScroll && !checkIsHidden()) {  // При прокрутке вниз
                 header.classList.add("header_hidden");
-            } else {
+            } 
+            
+            if(currentScroll < prevScroll  && checkIsHidden()) {  // При прокрутке вверх
                 header.classList.remove("header_hidden");
             }
 
@@ -37,7 +54,7 @@ function Header() {
         }
 
         changeHeaderBackground(); //Чтобы после обновления страницы фон изменился
-        
+
         document.addEventListener("scroll", changeHeaderBackground);
         document.addEventListener("scroll", changeHeaderVisibility);
         

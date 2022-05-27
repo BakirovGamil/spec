@@ -24,27 +24,27 @@ function Fancybox(props) {
 
       on: {
         initLayout: (fancybox) => {
-          const $leftCol = document.createElement("div");
-          $leftCol.classList.add("fancybox__leftCol");
+          const $photoColumn = document.createElement("div");
+          $photoColumn.classList.add("fancybox__leftCol");
     
           while (fancybox.$container.firstChild) {
-            $leftCol.appendChild(fancybox.$container.firstChild);
+            $photoColumn.appendChild(fancybox.$container.firstChild);
           }
     
-          const $rightCol = document.createElement("div");
-          $rightCol.classList.add("fancybox__rightCol");
+          const $dataColumn = document.createElement("div");
+          $dataColumn.classList.add("fancybox__rightCol");
     
           const $info = document.createElement("div");
-          $rightCol.appendChild($info);
+          $dataColumn.appendChild($info);
           fancybox.$info = $info;
     
           fancybox.$container.appendChild(fancybox.$backdrop);
     
-          fancybox.$container.appendChild($leftCol);
-          fancybox.$container.appendChild($rightCol);
+          fancybox.$container.appendChild($photoColumn);
+          fancybox.$container.appendChild($dataColumn);
     
-          fancybox.$leftCol = $leftCol;
-          fancybox.$rightCol = $rightCol;
+          fancybox.$leftCol = $photoColumn;
+          fancybox.$rightCol = $dataColumn;
         },
         "Carousel.ready Carousel.change": (fancybox, carousel, slideIndex) => {
           slideIndex =

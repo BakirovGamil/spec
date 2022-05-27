@@ -33,16 +33,13 @@
 
 .profile__rating-comment {
     display: flex;
+    font-size: 23px;
 }
 
 .profile__rating {
     display: flex;
     align-items: center;
     margin: 0 20px 0 0;
-}
-
-.profile__rate {
-    font-size: 25px;
 }
 
 .profile__comm {
@@ -58,7 +55,6 @@
     display: flex;
     align-items: center;
     color: var(--c-t);
-    font-size: 25px;
 }
 
 .profile__comment-btn:hover {
@@ -83,7 +79,6 @@
 }
 
 .profile__item {
-    line-height: 25px;
     margin: 0 0 40px 0;
 }
 

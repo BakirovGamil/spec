@@ -23,9 +23,13 @@
 .profile__button {
     transition: none;
     text-align: left;
-    padding-top: 12px;
-    padding-bottom: 12px;
     position: relative;
+    padding: 12px 20px 12px 20px;
+    border-radius: 10px;
+}
+
+.profile__button:hover {
+    background-color: var(--c-hover);
 }
 
 .profile__button:hover::after{
@@ -43,7 +47,7 @@
 .profile__button::after {
     content: "";
     position: absolute;
-    top: 48px;
+    top: 100%;
     left: 20px;
     width: 260px;
     background-color: var(--c-hover);
@@ -52,4 +56,20 @@
 
 .profile__main {
     display: flex;
+}
+
+#profile, #photo, #comments {
+    position: relative;
+    top: calc(-1 * var(--header-height) - 5px);
+}
+
+.profile-section {
+    margin: 0 0 30px 0;
+}
+
+@media (max-width: 1000px) {
+    .profile__actions_fake,
+    .profile__actions {
+        display: none;
+    }
 }
