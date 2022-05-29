@@ -3,6 +3,9 @@ import Input from "../../components/UI/Input/Input";
 import Button from "../../components/UI/Button/Button";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import useFetching from "../../hooks/useFetching";
+import useAuthUser from "../../hooks/useAuthUser";
+import AuthorizationService from "../../API/AuthorizarizationService"; 
 
 const initUser = {
     login: "",
@@ -11,6 +14,20 @@ const initUser = {
 
 function Login() {
     const [user, setUser] = useState(initUser);
+    const [authUser, setAuthUser] = useAuthUser();
+    const [isLoadingAuth, fethAuth, errorAuth] = useFetching(async () => {
+        const res = await AuthorizationService.login(user);
+        const resUser = await res.json();
+
+        if(res.ok) {
+            setAuthUser(resUser.body);
+            console.log(resUser.message);
+            console.log(resUser.body);
+        } else {
+            console.log(resUser.message);
+        }
+    });
+
     const handleChangeLogin = e => {
         const regExp =  /[\w-]/g;
         const filteredValueArray = e.target.value.match(regExp);
@@ -27,13 +44,21 @@ function Login() {
         }
     };
 
+    const logIn = async e => {
+        await fethAuth();
+
+        if(errorAuth) {
+            console.log(errorAuth);
+        }
+    }
+
     return (<>
         <Header/>
         <main className="main">
             <div className="authorization">
                 <div className="container">
                     <div className="authorization__container">
-                        <form className="authorization__form">
+                        <div className="authorization__form">
                             <div className="authorization__item authorization__title">
                                 <span>Авторизация</span>
                             </div>
@@ -51,9 +76,9 @@ function Login() {
                             </div>
                             <div className="authorization__item authorization__actions">
                                 <Link to="/authorization" className="authorization__link">Регистрация</Link>
-                                <Button className="authorization__button">Войти</Button>
+                                <Button className="authorization__button" onClick={logIn}>Войти</Button>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>

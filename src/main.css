@@ -11,7 +11,7 @@
 
 
 body.light {
-  --c-bg: rgb(230, 230, 230);
+  --c-bg: rgb(220, 220, 220);
   --c-bg-2: rgb(245, 245, 245);
   --c-bg-line: rgb(255, 174, 0);
   --c-header: rgb(255, 174, 0);
@@ -24,6 +24,7 @@ body.light {
   --c-radio: rgb(150, 150, 150);
   --c-radio-checked: rgb(50, 50, 50);
   --c-slider-button: rgba(200, 200, 200, 0.4);
+  --c-img: rgb(245, 245, 245);
 }
 
 body.dark {
@@ -40,6 +41,7 @@ body.dark {
   --c-radio: rgb(130, 130, 130);
   --c-radio-checked: rgb(255, 255, 255);
   --c-slider-button: rgba(34, 34, 38, 0.7);
+  --c-img: rgb(51, 51, 54);
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
@@ -55,7 +57,7 @@ body {
   background-position: top left;
   background-size: 510px auto;
   background-repeat: repeat;
-  backdrop-filter: blur(3px); */
+  backdrop-filter: blur(1px); */
 }
 
 html, body, #root, .wrapper {

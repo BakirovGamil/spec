@@ -1,0 +1,56 @@
+.SpecialistInfo {
+    padding: 30px 0 0 0;
+    display: flex;
+}
+
+.SpecialistInfo__img {
+    width: 120px;
+    height: 160px;
+    margin: 0 30px 0 0;
+    flex-shrink: 0;
+    background: url(/public/camera.png) center/40px 40px no-repeat;
+    background-color: var(--c-img);
+}
+
+.SpecialistInfo__img img {
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+}
+
+.SpecialistInfo__name {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 32px;
+}
+
+.SpecialistInfo__stat {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.SpecialistInfo__uploader {
+    font-size: 16px;
+}
+
+.SpecialistInfo__file-label {
+    width: 100%;
+    height: 100%;
+    border: 1px dashed var(--c-t);
+    padding: 3px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.SpecialistInfo__file-label:hover {
+    background-color: var(--c-hover);
+}
+
+.SpecialistInfo__uploader .SpecialistInfo__file-input {
+    display: none;
+}
+
+.SpecialistInfo__photoUploader {
+    min-width: 200px;
+}

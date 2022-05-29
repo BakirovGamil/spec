@@ -1,4 +1,4 @@
-.ServiceList__service {
+.ExperienceList__experience {
     display: flex;
     justify-content: space-between;
     margin: 0 0 15px 0;
@@ -7,7 +7,7 @@
     position: relative;
 }
 
-.ServiceList__input {
+.ExperienceList__input {
     border-radius: 5px;
     padding: 6px 10px 7px 10px;
     border-radius: 5px;
@@ -18,19 +18,15 @@
     margin: 0 7px 0 0;
 }
 
-.ServiceList__input:last-child {
+.ExperienceList__input:last-child {
     margin: 0;
 }
 
-.ServiceList__name {
+.ExperienceList__name {
     flex: 1 1 auto;
 }
 
-.ServiceList__price {
-    width: 100px;
-}
-
-.ServiceList__button {
+.ExperienceList__button {
     padding: 0;
     display: flex;
     justify-content: center;
@@ -40,16 +36,12 @@
     height: 38px;
 }
 
-/* .ServiceList__button span{
-    outline: 1px solid white;
-} */
-
-.ServiceList__button:hover {
+.ExperienceList__button:hover {
     background: var(--c-hover-2);
     color: black;
 }
 
-.ServiceList__newService {
+.ExperienceList__newExperience {
     opacity: 0.5;
     animation: newService 0.4s;
     z-index: 0;
