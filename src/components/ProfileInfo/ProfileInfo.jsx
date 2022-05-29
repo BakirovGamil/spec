@@ -3,7 +3,7 @@ import Button from "../UI/Button/Button";
 import Info from "../UI/Info/Info";
 import "./ProfileInfo.css";
 
-function ProfileInfo({className}) {
+function ProfileInfo({className, specialist}) {
     const classNameFull = className ? ["profile__info", className].join(" ") : "profile__info";
 
     return (
@@ -13,7 +13,7 @@ function ProfileInfo({className}) {
                     <img src="/profile.jpg" alt="Не удалось загрузить фотку"/>
                 </div>
                 <div className="profile__stat">
-                    <div className="profile__name">Екатерина Александровна Трофимова</div>
+                    <div className="profile__name">{`${specialist.user.lastName} ${specialist.user.firstName} ${specialist.user.middleName}`}</div>
                     <div className="profile__rating-comment">
                         <div className="profile__rating">
                             <i className="star profile__star"></i>
@@ -36,7 +36,7 @@ function ProfileInfo({className}) {
                             — имя, фамилия и фото совпадают.
                         </Info>
                         <Info placeholder={"Гарантия"} className="profile__verify-item">
-                            Специалист даёт гарантию на все услуги: «1 год»
+                            Специалист даёт гарантию на все услуги
                         </Info>
                     </div>
                 </div>
@@ -47,7 +47,7 @@ function ProfileInfo({className}) {
                     О себе
                 </div>
                 <div className="profile__about">
-                    Выполняю качественно и в срок установку предметов интерьера и ремонт квартир «под ключ». Опыт работы с 2006 года.
+                    {specialist.about}
                 </div>
             </div>
 
@@ -56,7 +56,7 @@ function ProfileInfo({className}) {
                     Опыт
                 </div>
                 <div className="profile__about">
-                    <Experience/>
+                    <Experience experiences={specialist.experience}/>
                 </div>
             </div>
         </div>

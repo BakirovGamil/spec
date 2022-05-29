@@ -1,10 +1,11 @@
 import "./Experience.css";
 
-function Experience() {
+function Experience({experiences}) {
     return (
         <ul className="Experience">
-            <li>Опыт работы с 2006 г. (16 лет)</li>
-            <li> На сервисе с ноября 2017 г. (4 года)</li>
+            {
+                experiences.map((experience, indx) => <li key={indx}>{experience}</li>)
+            }
         </ul>
     );
 }

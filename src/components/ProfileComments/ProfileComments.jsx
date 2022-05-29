@@ -1,8 +1,11 @@
+import { useNavigate, useParams } from "react-router-dom";
 import Comment from "../Comment/Comment";
 import Button from "../UI/Button/Button";
 import "./ProfileComments.css";
 
 function ProfileComments({className}) {
+    const navigator = useNavigate();
+    const {specialistId} = useParams();
     const classNameFull = className ? ["profile-comments", className].join(" ") : "profile-comments";
 
     return (
@@ -15,7 +18,7 @@ function ProfileComments({className}) {
                 <Comment/>
             </div>
             <div className="profile-comments__action">
-                <Button className="profile-comments__button">Посмотреть все отзывы</Button> 
+                <Button className="profile-comments__button" onClick={(e) => navigator(`/profile/comments/${specialistId}`)}>Посмотреть все отзывы</Button> 
             </div>
         </div>
     );

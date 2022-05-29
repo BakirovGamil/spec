@@ -1,78 +1,30 @@
-import Fancybox from "../Fancybox/Fancybox";
+import { useNavigate } from "react-router-dom";
 import Button from "../UI/Button/Button";
 import "./ProfilePhoto.css";
 
-function ProfilePhoto({className}) {
+function ProfilePhoto({className, images, specialistId}) {
+    const navigator = useNavigate();
     const classNameFull = className ? ["ProfilePhoto", className].join(" ") : "ProfilePhoto";
 
-    return (<div className={classNameFull}>
+    return (<div className={classNameFull} onClick={(e) => navigator(`/profile/photos/${specialistId}`)}>
         <div className="ProfilePhoto__title title">
                 Фотографии
         </div>
         <div className="ProfilePhoto__body">
-            <div className="ProfilePhoto__img">
-                <img src="https://lipsum.app/id/46/200x150"/>
-            </div>
-            <div className="ProfilePhoto__img">
-                <img src="https://lipsum.app/id/51/200x150" />
-            </div>
-            <div className="ProfilePhoto__img">
-                <img src="https://lipsum.app/id/46/200x150" />
-            </div>
-            <div className="ProfilePhoto__img">
-                <img src="https://lipsum.app/id/46/200x150" />
-            </div>
+            {
+                images.map(image => {
+                    return (
+                        <div key={image.id} className="ProfilePhoto__img">
+                            <img src={`http://localhost:3000/${image.filename}`} alt={"Не удалось загрузить фотку"}/>
+                        </div>
+                    );
+                })
+            }
         </div>
         <div className="PrfoilePhoto_action">
-            <Button className="PrfoilePhoto__button">Посмотреть все фотографии</Button> 
+            <Button className="PrfoilePhoto__button" >Посмотреть все фотографии</Button> 
         </div>
     </div>);
 }
 
 export default ProfilePhoto;
-
-
-{/* <Fancybox options={{ infinite: true }}>
-             <a data-fancybox="gallery" 
-                data-info="АААААААААААААААААААААААААААААААА"
-                href="https://lipsum.app/id/46/1600x1200"
-             >
-                <img src="https://lipsum.app/id/46/200x150" />
-            </a>
-            <a data-fancybox="gallery" data-info="Какое-то описание" href="https://lipsum.app/id/47/1600x1200">
-                <img src="https://lipsum.app/id/47/200x150" />
-            </a>
-            <a data-fancybox="gallery" href="https://lipsum.app/id/51/1600x1200">
-                <img src="https://lipsum.app/id/51/200x150" />
-            </a>
-            <a data-fancybox="gallery" href="https://lipsum.app/id/46/1600x1200">
-                <img src="https://lipsum.app/id/46/200x150" />
-            </a>
-            <a data-fancybox="gallery" href="https://lipsum.app/id/47/1600x1200">
-                <img src="https://lipsum.app/id/47/200x150" />
-            </a>
-            <a data-fancybox="gallery" href="https://lipsum.app/id/51/1600x1200">
-                <img src="https://lipsum.app/id/51/200x150" />
-            </a><a data-fancybox="gallery" href="https://lipsum.app/id/46/1600x1200">
-                <img src="https://lipsum.app/id/46/200x150" />
-            </a>
-            <a data-fancybox="gallery" href="https://lipsum.app/id/47/1600x1200">
-                <img src="https://lipsum.app/id/47/200x150" />
-            </a>
-            <a data-fancybox="gallery" href="https://lipsum.app/id/51/1600x1200">
-                <img src="https://lipsum.app/id/51/200x150" />
-            </a><a data-fancybox="gallery" href="https://lipsum.app/id/46/1600x1200">
-                <img src="https://lipsum.app/id/46/200x150" />
-            </a>
-            <a data-fancybox="gallery" href="https://lipsum.app/id/47/1600x1200">
-                <img src="https://lipsum.app/id/47/200x150" />
-            </a>
-            <a data-fancybox="gallery" href="https://lipsum.app/id/51/1600x1200">
-                <img src="https://lipsum.app/id/51/200x150" />
-            </a><a data-fancybox="gallery" href="https://lipsum.app/id/46/1600x1200">
-                <img src="https://lipsum.app/id/46/200x150" />
-            </a>
-            <a data-fancybox="gallery" href="https://lipsum.app/id/47/1600x1200">
-                <img src="https://lipsum.app/id/47/200x150" />
-            </a>
-        </Fancybox> */}

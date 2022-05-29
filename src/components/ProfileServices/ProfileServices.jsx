@@ -1,6 +1,6 @@
 import "./ProfileServices.css";
 
-function ProfileServices({className}) {
+function ProfileServices({className, services}) {
     const classNameFull = className ? ["ProfileServices", className].join(" ") : "ProfileServices";
 
     return (<div className={classNameFull}>
@@ -8,22 +8,20 @@ function ProfileServices({className}) {
             Услуги
         </div>
         <div className="ProfileServices__body">
-            <div className="ProfileServices__service">
-                <div className="ProfileServices__name">
-                    Индивидуальные занятия
-                </div>
-                <div className="ProfileServices__price">
-                    300Р
-                </div>
-            </div>
-            <div className="ProfileServices__service">
-                <div className="ProfileServices__name">
-                    Бокс
-                </div>
-                <div className="ProfileServices__price">
-                    300Р
-                </div>
-            </div>
+            {
+                services.map((service) => {
+                    return (
+                        <div key={service.id} className="ProfileServices__service">
+                            <div className="ProfileServices__name">
+                                {service.name}
+                            </div>
+                            <div className="ProfileServices__price">
+                                {service.price}
+                            </div>
+                        </div>
+                    );
+                })
+            }
         </div>
     </div>);
 }

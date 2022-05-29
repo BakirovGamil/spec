@@ -53,8 +53,8 @@ function App() {
 					<Route path='authorization' element={<Authorization />} />
 					<Route path='login' element={<Login />} />
 					<Route path='profile/:specialistId' element={<ProfileId />} />
-					<Route path='profile/photos' element={<ProfilePhotos />} />
-					<Route path='profile/comments' element={<ProfileComments />} />
+					<Route path='profile/photos/:specialistId' element={<ProfilePhotos />} />
+					<Route path='profile/comments/:specialistId' element={<ProfileComments />} />
 					<Route path='specialist/registration' element={<SpecialistRegistration />} />
 				</Routes>
 			</div>

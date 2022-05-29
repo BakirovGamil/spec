@@ -1,8 +1,8 @@
 const apiPath = 'http://localhost:3000/api/image/';
 
 export default class ImageService {
-    static async getGalleryByUsertId(userId) {
-        const response = fetch(apiPath + `?userId=${userId}&type=gallery`);
+    static async getGalleryByUsertId(userId, limit) {
+        const response = fetch(apiPath + `?userId=${userId}&limit=${limit}&type=gallery`);
 
         return response;
     }

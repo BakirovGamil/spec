@@ -16,8 +16,8 @@ function Main() {
                 <Meet/>
                 <Rating name="rating"/>
                 <Link to="profile/1653787171994">Пример профиля</Link><br />
-                <Link to="profile/photos">Пример всех фоток профиля</Link><br />
-                <Link to="profile/comments">Пример всех отзывов профиля</Link><br />
+                <Link to="profile/photos/1653787171994">Пример всех фоток профиля</Link><br />
+                <Link to="profile/comments/1653787171994">Пример всех отзывов профиля</Link><br />
                 <Link to="specialist/registration">Страница регистрации специалиста</Link><br />
             </div>
             <div className="test">
