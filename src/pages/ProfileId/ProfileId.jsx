@@ -1,11 +1,49 @@
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import useFetching from "../../hooks/useFetching";
 import Header from "../../components/Header/Header";
 import ProfileComments from "../../components/ProfileComments/ProfileComments";
 import ProfileInfo from "../../components/ProfileInfo/ProfileInfo";
 import ProfilePhoto from "../../components/ProfilePhoto/ProfilePhoto";
 import ProfileServices from "../../components/ProfileServices/ProfileServices";
 import "./ProfileId.css"
+import SpecialistService from "../../API/SpecialistService";
+import ServiceService from "../../API/ServiceService";
+import ImageService from "../../API/ImageService";
 
 function Profile() {
+    const {specialistId} = useParams();
+    // const navigator = useNavigate();
+    const [isSpecialistLoading, fetchSpecialist, errorSpecialist] = useFetching(async () => {
+        const res = await SpecialistService.getById(specialistId);
+        const resSpecialist = await res.json();
+        if(res.ok) {
+            console.log(resSpecialist);
+        } else {
+            console.log(resSpecialist.message);
+        }
+
+        const res2 = await ServiceService.getBySpecialistId(specialistId);
+        const resServices = await res2.json();
+        if(res2.ok) {
+            console.log(resServices);
+        } else {
+            console.log(resServices.message);
+        }
+
+        const res3 = await ImageService.getAvatarByUsertId(resSpecialist.user.id);
+        const resImages = await res3.json();
+        if(res3.ok) {
+            console.log(resImages);
+        } else {
+            console.log(resImages.message);
+        }
+    });
+
+    useEffect(() => {
+        fetchSpecialist();
+    }, []);
+
     return (<>
         <Header/>
         <main>

@@ -10,7 +10,7 @@ function ProfileInfo({className}) {
         <div className={classNameFull}>
             <div className="profile__item profile__main">
                 <div className="profile__img">
-                    <img src="profile.jpg" alt="Не удалось загрузить фотку"/>
+                    <img src="/profile.jpg" alt="Не удалось загрузить фотку"/>
                 </div>
                 <div className="profile__stat">
                     <div className="profile__name">Екатерина Александровна Трофимова</div>

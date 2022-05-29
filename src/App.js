@@ -52,7 +52,7 @@ function App() {
 					<Route path='meet' element={<Meet />} />
 					<Route path='authorization' element={<Authorization />} />
 					<Route path='login' element={<Login />} />
-					<Route path='profile' element={<ProfileId />} />
+					<Route path='profile/:specialistId' element={<ProfileId />} />
 					<Route path='profile/photos' element={<ProfilePhotos />} />
 					<Route path='profile/comments' element={<ProfileComments />} />
 					<Route path='specialist/registration' element={<SpecialistRegistration />} />
