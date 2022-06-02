@@ -6,4 +6,17 @@ export default class ServiceService {
 
         return response;
     }
+
+    //{name, price}
+    static async add(dataObject) {
+        const response = await fetch(apiPath + `registration`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(dataObject)
+        });
+
+        return response;
+    }
 }

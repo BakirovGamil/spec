@@ -1,33 +1,64 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import CommentService from "../../API/CommentService";
 import SpecialistService from "../../API/SpecialistService";
-import Comment from "../../components/Comment/Comment";
+import CommentsStatistics from "../../components/CommentsStatistics/CommentsStatistics";
 import Header from "../../components/Header/Header";
 import Button from "../../components/UI/Button/Button";
 import useFetching from "../../hooks/useFetching";
+import Comments from "../../components/ProfileComments/ProfileComments";
 import "./ProfileComments.css";
+import ProfileInfo from "../../components/ProfileInfo/ProfileInfo";
+import ImageService from "../../API/ImageService";
 
 function ProfileComments() {
     const {specialistId} = useParams();
     const navigator = useNavigate();
     const [specialist, setSpecialist] = useState(null);
     const [comments, setComments] = useState(null);
+    const [commentsStats, setCommentsStats] = useState(null);
+    const [filter, setFilter] = useState({
+        5: false,
+        4: false,
+        3: false,
+        2: false,
+        1: false
+    });
+
+    const filteredComments = useMemo(() => {
+        if(!comments) return comments;
+
+        if(Object.values(filter).every(filter => filter === false)) return comments;
+        
+        return comments.filter(comment => filter[comment.rating]);
+    }, [filter, comments]);
 
     const [isLoading, fetch, error] = useFetching(async () => {
         const resSpecialist = await SpecialistService.getById(specialistId);
         const resSpecialistBody = await resSpecialist.json();
         if(!resSpecialist.ok) return console.log(resSpecialistBody.message);
         
-        const resComments = await CommentService.getCommentsBySepcialistId(specialistId, 4);
+        const resComments = await CommentService.getCommentsBySepcialistId(specialistId, 0);
         const resCommentsBody = await resComments.json();
+        if(!resComments.ok)  return console.log(resCommentsBody.message);
+
+        const resAvatar = await ImageService.getAvatarByUsertId(resSpecialistBody.user.id);
+        const resAvatarBody = await resAvatar.json();
+        if(!resAvatar.ok)  return console.log(resAvatarBody.message);
+
+        const resCommentsStats = await CommentService.getCommentStatsOfSpecialist(specialistId);
+        const resCommentsStatsBody = await resCommentsStats.json();
         if(!resComments.ok)  return console.log(resCommentsBody.message);
 
         console.log(resSpecialistBody);
         console.log(resCommentsBody);
 
-        setSpecialist(resSpecialistBody);
+        setSpecialist({
+            ...resSpecialistBody,
+            avatar: resAvatarBody[0],
+        });
         setComments(resCommentsBody);
+        setCommentsStats(resCommentsStatsBody);
     });
 
     useEffect(() => {
@@ -45,14 +76,20 @@ function ProfileComments() {
                             <i className="gg-chevron-left"></i>
                             Вернуться назад
                         </Button>
+
                         <div className="comments__title title">
                             <span className="title__text">Отзывы {`${specialist.user.lastName} ${specialist.user.firstName} ${specialist.user.middleName}`}</span>
                         </div>
+                        
+                        <ProfileInfo className="comments__profile" commentsStats={commentsStats} specialist={specialist} comments={comments}/>
+
                         <div className="comments__body">
-                            <Comment/>
-                            <Comment/>
-                            <Comment/>
-                            <Comment/>
+                            <div className="comments__leftCol">
+                                <Comments comments={filteredComments} commentsStats={commentsStats}/>
+                            </div>
+                            <div className="comments__rightCol">
+                                <CommentsStatistics className="comments__statistics" filter={filter} setFilter={setFilter} comments={comments}/>
+                            </div>              
                         </div>
                     </div>
                 </div>

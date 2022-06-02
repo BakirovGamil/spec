@@ -12,4 +12,18 @@ export default class ImageService {
 
         return response;
     }
+
+    // type = avatar, gallery, passport
+    static async uploadImage(blobFile, type) {
+        const formdata = new FormData();
+	    formdata.append('image', blobFile, 'image.png');
+        formdata.append('type', type);
+
+        const response = await fetch(apiPath + `uploadImage`, {
+            method: 'POST',
+            body: formdata
+        });
+
+        return response;
+    }
 }

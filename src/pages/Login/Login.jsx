@@ -2,7 +2,7 @@ import Header from "../../components/Header/Header";
 import Input from "../../components/UI/Input/Input";
 import Button from "../../components/UI/Button/Button";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useFetching from "../../hooks/useFetching";
 import useAuthUser from "../../hooks/useAuthUser";
 import AuthorizationService from "../../API/AuthorizarizationService"; 
@@ -15,12 +15,14 @@ const initUser = {
 function Login() {
     const [user, setUser] = useState(initUser);
     const [authUser, setAuthUser] = useAuthUser();
+    const navigator = useNavigate();
     const [isLoadingAuth, fethAuth, errorAuth] = useFetching(async () => {
         const res = await AuthorizationService.login(user);
         const resUser = await res.json();
 
         if(res.ok) {
             setAuthUser(resUser.body);
+            navigator("/");
             console.log(resUser.message);
             console.log(resUser.body);
         } else {

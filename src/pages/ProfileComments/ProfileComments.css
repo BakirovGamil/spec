@@ -6,27 +6,17 @@
 
 .comments__body {
     display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
-.comments__body > * {
-    position: relative;
-    margin: 0 0 20px 0;
-    padding: 10px 0;
+.comments__leftCol {
+    flex: 1 1 auto;
+    padding: 0 50px 0 0;
 }
 
-.comments__body > *::after {
-    content: '';
-    display: block;
-    position: absolute;
-    left: 0;
-    top: 100%;
-    width: 100%;
-    height: 1px;
-    background-color: var(--c-hover);
+.comments__rightCol {
+    padding: 52px 0 0 0 ;
 }
 
-.comments__body > *:last-child::after {
-    content: none;
+.comments__profile {
+    margin: 0 0 25px 0;
 }

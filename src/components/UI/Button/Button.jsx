@@ -1,10 +1,10 @@
 import cls from "./Button.module.css"
 
-function Button({children, className, ...props}) {
+function Button({children, className, isBackground = false, ...props}) {
     const classNameCat = className ? [cls.btn, className].join(" ") : cls.btn;
     
     return (
-        <button  className={classNameCat} {...props}>
+        <button  className={classNameCat} {...props} data-isbackground={isBackground}>
             {children}
         </button>
     );

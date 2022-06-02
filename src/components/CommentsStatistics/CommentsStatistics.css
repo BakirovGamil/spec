@@ -1,0 +1,15 @@
+.commentStatistics__ratingContainer {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.commentStatistics__checkbox {
+    margin: 0 15px 0 0;
+    cursor: pointer;
+}
+
+.commentStatistics__rating {
+    margin: 0 15px 0 0;
+    cursor: pointer!important;
+}

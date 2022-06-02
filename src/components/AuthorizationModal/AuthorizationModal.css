@@ -1,0 +1,25 @@
+.authorizationModal {
+    min-width: 350px;
+}
+
+.authorizationModal__input {
+    min-width: 350px;
+}
+
+.authorizationModal > * {
+    margin: 0 0 15px 0;
+}
+
+.authorizationModal input {
+    background-color: var(--c-bg-2);
+}
+
+.authorizationModal :last-child {
+    margin: 0;
+}
+
+.authorizationModal__actions {
+    padding: 10px 0 0 0;
+    display: flex;
+    justify-content: space-between;
+}

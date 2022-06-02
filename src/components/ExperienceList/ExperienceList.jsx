@@ -5,7 +5,7 @@ import "./ExperienceList.css";
 
 const getNewExperience = () => ({id: uuid(), data: ""});
 
-function ExperienceList() {
+function ExperienceList({setParentExperiences}) {
     const [experiences, setExperiences] = useState([getNewExperience(), getNewExperience()]);
 
     useEffect(() => {
@@ -14,6 +14,7 @@ function ExperienceList() {
             setExperiences([...experiences, getNewExperience()])
         }
 
+        setParentExperiences(experiences);
     }, [experiences]);
 
     function checkLastExperience() {

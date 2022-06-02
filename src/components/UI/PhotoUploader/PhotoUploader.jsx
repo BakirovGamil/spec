@@ -1,7 +1,7 @@
 import cls from "./PhotoUploader.module.css";
 import {useId} from "react";
 
-function PhotoUploader({placeholder, className, name}) {
+function PhotoUploader({placeholder, className, name, onChange}) {
     const fullClassName = className ? [cls.uploader, className].join(" ") : cls.uploader;
     const id = useId();
     const choosedId = name ?? id;
@@ -12,7 +12,7 @@ function PhotoUploader({placeholder, className, name}) {
             <label htmlFor={choosedId} className={cls.label}>
                 {choosedPlaceholder}
             </label>
-            <input type="file" accept="image/png, image/jpeg" className={cls.input} name={choosedId} id={choosedId}/>
+            <input onChange={onChange} type="file" accept="image/png, image/jpeg" className={cls.input} name={choosedId} id={choosedId}/>
         </div>
     )
 }

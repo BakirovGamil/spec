@@ -4,6 +4,10 @@
     border-radius: 10px;
 }
 
+.btn[data-isbackground=true] {
+    background-color: var(--c-btn);
+}
+
 .btn:hover {
     background-color: var(--c-hover);
 }

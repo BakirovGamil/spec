@@ -4,6 +4,8 @@ import ThemeSwitcher from "../UI/ThemeSwitcher/ThemeSwitcher";
 import { createRef, useEffect } from "react";
 import DropDown from "../UI/DropDown/DropDown";
 import { Link } from "react-router-dom";
+import useAuthUser from "../../hooks/useAuthUser";
+import AuthorizationService from "../../API/AuthorizarizationService";
 
 function getFullHeightOfDocument() {
     return Math.max(
@@ -16,6 +18,7 @@ function getFullHeightOfDocument() {
 function Header() {
     const headerRef = createRef();
     const fakeHeaderRef = createRef();
+    const [authUser, setAuthUser] = useAuthUser();
 
     useEffect(() => {
         const header = headerRef.current;
@@ -64,6 +67,13 @@ function Header() {
         }
     }, []);
 
+    const logout = async function () {
+        const resAuth = await AuthorizationService.logout();
+
+        if(!resAuth.ok) return console.log("Что-то пошло не так!");
+
+        setAuthUser(null);
+    }
 
     return (<>
         <div ref={fakeHeaderRef} className="fake-header"></div>
@@ -74,10 +84,28 @@ function Header() {
                         <li className='nav__item'><Logo className='nav__action'/></li>
                         <li className='nav__item'>
                             <ThemeSwitcher className='nav__theme-switcher'/>
-                            <DropDown placeholder={<i className="gg-enter"></i>} classNameButton="nav__action" classNameContent="nav__dropdown">
-                                <Link to="/login">Войти</Link>
-                                <Link to="/authorization">Регистрация</Link>
-                            </DropDown>  
+                            {
+                                !authUser && 
+                                <DropDown placeholder={<i className="gg-enter"></i>} classNameButton="nav__action" classNameContent="nav__dropdown">
+                                    <Link to="/login">Войти</Link>
+                                    <Link to="/authorization">Регистрация</Link>
+                                </DropDown>  
+                            }
+                            {
+                                authUser && 
+                                <DropDown placeholder={<i className="gg-enter"></i>} classNameButton="nav__action" classNameContent="nav__dropdown">
+                                    <Link to="/specialist/registration">Стать специалистом</Link>
+                                    <a 
+                                        href="#" 
+                                        onClick={(e) => {
+                                            e.preventDefault(); 
+                                            logout();
+                                        }
+                                    }>
+                                        Выйти
+                                    </a>
+                                </DropDown>  
+                            }
                         </li>
                     </ul>
                 </nav>

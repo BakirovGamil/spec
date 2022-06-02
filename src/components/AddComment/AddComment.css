@@ -1,0 +1,59 @@
+
+.addComment__ratingContainer {
+    display: flex;
+    margin: 0 0 15px 0;
+}
+
+.addComment__send {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.addComment__textArea {
+    padding: 10px;
+    border-radius: 5px;
+    background-color: var(--c-bg-2);
+    width: 100%;
+    color: var(--c-t);
+    height: 100px;
+    font-size: 16px;
+    letter-spacing: 1px;
+    resize: none;
+    margin: 0 15px 0 0;
+}
+
+.addComment__text {
+    margin: 0 15px 0 0;
+}
+
+.addComment__existComment {
+    background-color: var(--c-bg-2);
+    border-radius: 5px;
+    padding: 15px;
+}
+
+.addComment__existCommentContainer {
+    position: relative;
+}
+
+.addComment__editBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 35px;
+    padding: 5px;
+}
+
+.addComment__actions {
+    position: absolute;
+    gap: 5px;
+    top: 0;
+    right: 0;
+    display: flex;
+}
+
+.addComment__existComment-text {
+    margin: 0 0 15px 0;
+}

@@ -1,25 +1,28 @@
 import Rating from "../Rating/Rating";
 import "./Comment.css";
 
-function Comment() {
+function Comment({comment, className}) {
+    const user = comment.user; 
+    const classNameFull = className ? ["comment", className].join(" ") : "comment";
+
     return (
-        <div className="comment">
+        <div className={classNameFull}>
             <div className="comment__left-column">
-            <div className="comment__avatar">Г</div>
-                <Rating className="comment__rating" isDisabled value={3}/>
+            <div className="comment__avatar">{user.firstName[0]}</div>
+                <Rating className="comment__rating" isDisabled value={comment.rating}/>
                 <div className="comment__date">
-                    {(new Date()).toLocaleDateString()}
+                    {new Date(comment.date).toLocaleDateString()}
                 </div>
             </div>
             <div className="comment__right-column">
                 <div className="comment__author">
-                    Генадий Пупкин
+                    {`${user.lastName} ${user.firstName}`}
                 </div>
                 <div className="comment__services">
-                    Ремонт почтовых ящиков
+                    {comment.services.map((service, indx) => <span key={indx}>{service}</span>)}
                 </div>
                 <div className="comment__info">
-                    Екатерина пунктуальный и хороший мастер! Большое спасибо за работу!
+                    {comment.data}
                 </div>
             </div>
         </div>

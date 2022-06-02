@@ -27,3 +27,7 @@
 .profile-comments__button {
     background-color: var(--c-hover);
 }
+
+.profile-comments__addComment {
+    margin: 0 0 15px 0;
+}

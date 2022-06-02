@@ -5,7 +5,7 @@ import "./ServiceList.css";
 
 const getNewService = () => ({id: uuid(), name: "", price: ""});
 
-function ServiceList() {
+function ServiceList({setParentServices}) {
     const [services, setServices] = useState([getNewService(), getNewService()]);
 
     useEffect(() => {
@@ -13,6 +13,8 @@ function ServiceList() {
         if(checkLastService()) {
             setServices([...services, getNewService()])
         }
+
+        setParentServices(services);
     }, [services]);
 
     function checkLastService() {

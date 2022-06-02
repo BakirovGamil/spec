@@ -4,7 +4,7 @@ import Button from "../../components/UI/Button/Button";
 import "./Authorization.css"
 import { useState } from "react";
 import AuthorizationListItem from "./AuthorizationListItem";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AuthorizationService from "../../API/AuthorizarizationService";
 import useFetching from "../../hooks/useFetching";
 
@@ -24,11 +24,13 @@ function Authorization() {
         isDifferentCase: false,
         isContainDigits: false,
     });
+    const navigator = useNavigate();
     const [isLoadingRegistration, fethRegistration, errorRegistration] = useFetching(async () => {
         const res = await AuthorizationService.registration(user);
         const resMessage = await res.json();
 
         if(res.ok) {
+            navigator("/login");
             console.log(resMessage.message);
             console.log(resMessage.body);
         } else {

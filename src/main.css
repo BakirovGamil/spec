@@ -25,6 +25,7 @@ body.light {
   --c-radio-checked: rgb(50, 50, 50);
   --c-slider-button: rgba(200, 200, 200, 0.4);
   --c-img: rgb(245, 245, 245);
+  --c-btn: rgb(235, 190, 67);
 }
 
 body.dark {
@@ -42,6 +43,7 @@ body.dark {
   --c-radio-checked: rgb(255, 255, 255);
   --c-slider-button: rgba(34, 34, 38, 0.7);
   --c-img: rgb(51, 51, 54);
+  --c-btn: rgb(44, 44, 46);
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
