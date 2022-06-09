@@ -1,0 +1,65 @@
+.SpecialistProfile {
+    padding: 30px 0 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.SpecialistProfile__SpecialistInfo {
+    padding: 0;
+}
+
+.SpecialistProfile__info {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 30px;
+}
+
+.SpecialistProfile__info > :first-child {
+    flex: 0 0 500px;
+    align-self: center;
+}
+
+.editName {
+    min-width: 350px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+}
+
+.editName__btn {
+    align-self: center;
+    margin: 20px 0 0 0;
+}
+
+.SpecialistProfile__experience {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.SpecialistProfile__ExpActions {
+    display: flex;
+    gap: 10px;
+}
+
+.SpecialistProfile__line {
+    transition: none;
+    padding: 0 0 0 5px;
+}
+
+.SpecialistProfile__line:hover {
+    border-radius: 5px;
+    background-color: var(--c-hover);
+}
+
+.SpecialistProfileContainer .container {
+    max-width: 850px;
+}
+
+.SpecialistProfile__service {
+    font-size: 18px;
+    padding: 3px 10px;
+}

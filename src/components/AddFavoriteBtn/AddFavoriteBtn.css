@@ -1,0 +1,25 @@
+.AddFavoriteBtn {
+    padding: 10px;
+}
+
+.AddFavoriteBtn:hover {
+    background-color: inherit;
+    opacity: 0.6;
+}
+
+.AddFavoriteBtn_active {
+    color: rgb(255, 51, 71);
+    animation: heart 0.4s;
+}
+
+@keyframes heart {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}

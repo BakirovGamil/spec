@@ -1,0 +1,116 @@
+.finder {
+    padding: 30px 0 0 0;
+}
+
+.finder__form {
+    display: flex;
+    align-items: flex-end;
+    gap: 20px;
+    margin: 0 0 15px 0;
+}
+
+.finder__input {
+    flex: 1 1 auto;
+}
+
+.finder__radio {
+    cursor: pointer;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.finder__findBy {
+    display: flex;
+    gap: 15px;
+    margin: 15px 0;
+}
+
+.finder__sortBy {
+    margin: 15px 0;
+    display: flex;
+    gap: 25px;
+}
+
+.FinderAvatar {
+    width: 70px;
+    height: 100px;
+}
+
+.FinderAvatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.FinderSpecialist {
+    display: flex;
+    gap: 20px;
+}
+
+.FinderSpecialistInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.finder__specialists {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.FinderSpecialist {
+    padding: 20px;
+    border-radius: 5px;
+    background-color: var(--c-bg-3);
+    cursor: pointer;
+}
+
+.FinderSpecialist__professions {
+    opacity: 0.4;
+    font-size: 15px;
+    line-height: 17px;
+}
+
+.FinderSpecialist__info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.FinderSpecialistInfo {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.FinderSpecialistInfo__body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.finder > .container {
+    max-width: 800px;
+}
+
+.FinderSpecialist__actions {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.finder__empty {
+    position: absolute;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 35px;
+    width: 100%;
+    height: 35px;
+    top: calc(50% - 35px/2);
+    left: 0;
+    text-align: center;
+}

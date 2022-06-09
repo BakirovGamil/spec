@@ -1,33 +1,53 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "../components/Header/Header";
+import LastComments from "../components/LastComments/LastComments";
 import Meet from "../components/Meet/Meet";
-import Rating from "../components/Rating/Rating";
 import Subscription from "../components/Subscription/Subscription";
-import Modal from "../components/UI/Modal/Modal";
+import Button from "../components/UI/Button/Button";
+import Input from "../components/UI/Input/Input";
 
 function Main() {
-    const [isVisible, setIsVisible] = useState(false);
+    const navigator = useNavigate();
+
+    function handleSearch(e) {
+        e.preventDefault();
+        navigator(`/search/${e.target.query.value}`)
+    }
 
     return ( <>
         <Header/>
         <main className="main">
             <div className="container">
                 <Meet/>
-                <Rating name="rating"/>
-                <Link to="profile/1653787171994">Пример профиля</Link><br />
-                <Link to="profile/photos/1653787171994">Пример всех фоток профиля</Link><br />
-                <Link to="profile/comments/1653787171994">Пример всех отзывов профиля</Link><br />
-                <Link to="specialist/registration">Страница регистрации специалиста</Link><br />
             </div>
-            <div className="test">
+            <div className="search">
                 <div className="container">
-                    <button onClick={()=>setIsVisible(true)}>Тест модального окна</button> <br/>
+                    <div className="search__title title">
+                        Поиск
+                    </div>
+                    <div className="Search__body">
+                        <form className="search__form" onSubmit={handleSearch}>
+                            <Input className="search__input" name="query" placeholder="Найти специалиста" isBackground/>
+                            <Button isBackground>
+                                Перейти к поиску
+                            </Button>
+                        </form>
+                    </div>
                 </div>
-                <Modal title={"Сидорович"} isVisible={isVisible} setIsVisible={setIsVisible}>
-                    Короче, Меченый, я тебя спас и в благородство играть не буду: выполнишь для меня пару заданий — и мы в расчете. Заодно посмотрим, как быстро у тебя башка после амнезии прояснится. А по твоей теме постараюсь разузнать. Хрен его знает, на кой ляд тебе этот Стрелок сдался, но я в чужие дела не лезу, хочешь убить, значит есть за что...
-                </Modal>
             </div>
+
+            <div className="aboutService">
+                <div className="container">
+                    <div className="aboutService__title title">
+                        О сервисе
+                    </div>
+                    <div className="aboutService__body">
+                        <p>Cайт является платформой поиска специалистов для выполнения различных услуг с возможностью оформления подписок. </p>
+                        <p>Если вы являетесь специалистом, то вы можете прейти на вкладку "Стать спецалистом" в меню сайта.</p>
+                    </div>
+                </div>
+            </div>
+           <LastComments/>
             <div className="subscriptions">
                 <div className="container">
                     <div className="subscriptions__title title">

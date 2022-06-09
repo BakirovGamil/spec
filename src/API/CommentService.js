@@ -15,6 +15,12 @@ export default class CommentService {
         return response;
     }
 
+    static async getLastComments(limit = 10) {
+        const response = fetch(apiPath + `/?limit=${limit}`);
+
+        return response;
+    }
+
     static async getCommentsBySepcialistId(specialistId, limit) {
         const response = fetch(apiPath + `?specialistId=${specialistId}&limit=${limit}`);
 

@@ -5,7 +5,7 @@ import "./ExperienceList.css";
 
 const getNewExperience = () => ({id: uuid(), data: ""});
 
-function ExperienceList({setParentExperiences}) {
+function ExperienceList({setParentExperiences, placeholder = "Опыт работы сантехником 10 лет..."}) {
     const [experiences, setExperiences] = useState([getNewExperience(), getNewExperience()]);
 
     useEffect(() => {
@@ -59,7 +59,7 @@ function ExperienceList({setParentExperiences}) {
 
                         return (  
                             <div key={experience.id} className="ExperienceList__experience">
-                                <input className="ExperienceList__input ExperienceList__name" placeholder="Опыт работы сантехником 10 лет..." value={experience.data} onChange={e => changeExperience(e, experience.id, "data")} required/>
+                                <input className="ExperienceList__input ExperienceList__name" placeholder={placeholder} value={experience.data} onChange={e => changeExperience(e, experience.id, "data")} required/>
                                 <Button className="ExperienceList__button" onClick={(e) => removeExperience(e, experience.id)}>
                                     <i className="gg-close"></i>
                                 </Button>

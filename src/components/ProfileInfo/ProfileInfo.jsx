@@ -1,9 +1,12 @@
 import Experience from "./Experience";
-import Button from "../UI/Button/Button";
-import Info from "../UI/Info/Info";
 import "./ProfileInfo.css";
+import AddFavoriteBtn from "../AddFavoriteBtn/AddFavoriteBtn";
+import WriteMessage from "../WriteMessage/WriteMessage";
+import BanBtn from "../BanBtn/BanBtn";
+import VerifyBtn from "../VerifyBtn/VerifyBtn";
+import IsVerify from "../IsVerify/IsVerify";
 
-function ProfileInfo({className, specialist, comments, commentsStats}) {
+function ProfileInfo({className, specialist, setSpecialist, comments, commentsStats}) {
     const classNameFull = className ? ["profile__info", className].join(" ") : "profile__info";
 
     return (
@@ -22,22 +25,14 @@ function ProfileInfo({className, specialist, comments, commentsStats}) {
                             </span>
                         </div>
                         <div className="profile__comm">
-                            <Button className="profile__comment-btn">
-                                <i className="gg-comment"></i>
-                                Написать
-                            </Button>
+                            <WriteMessage userId={specialist.user.id}/>
+                            <AddFavoriteBtn specialistId={specialist.id}/>
+                            <BanBtn specialist={specialist}  setSpecialist={setSpecialist} isOne/>
+                            <VerifyBtn specialist={specialist}  setSpecialist={setSpecialist} isOne/>
                         </div>
                     </div>
                     <div className="profile__verify">
-                        <Info placeholder={"Паспорт проверен"} className="profile__verify-item">
-                            Мы проверили копию паспорта:<br/>
-                            — следы редактирования<br/>    
-                            отсутствуют;<br/>
-                            — имя, фамилия и фото совпадают.
-                        </Info>
-                        <Info placeholder={"Гарантия"} className="profile__verify-item">
-                            Специалист даёт гарантию на все услуги
-                        </Info>
+                       <IsVerify specialist={specialist}/>
                     </div>
                 </div>
             </div>
@@ -50,6 +45,26 @@ function ProfileInfo({className, specialist, comments, commentsStats}) {
                     {specialist.about}
                 </div>
             </div>
+            
+           {
+               specialist.professions &&
+               <div className="profile__item">
+               <div className="profile__title">
+                   {   
+                       specialist.professions.length === 1
+                       ? "Профессия"
+                       : "Профессии"
+                   }
+               </div>
+               <div className="profile__about">
+                   <ul className="Experience">
+                       {
+                           specialist.professions.map((profession) => <li key={profession.id}>{profession.name[0].toUpperCase() + profession.name.slice(1)}</li>)
+                       }
+                   </ul>
+               </div>
+           </div>
+           }
 
             <div className="profile__item">
                 <div className="profile__title">

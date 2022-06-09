@@ -19,7 +19,7 @@ function ProfilePhotos() {
         const resSpecialistBody = await resSpecialist.json();
         if(!resSpecialist.ok) return console.log(resSpecialistBody.message);
 
-        const resImages = await ImageService.getGalleryByUsertId(resSpecialistBody.user.id, 4);
+        const resImages = await ImageService.getGalleryByUsertId(resSpecialistBody.user.id, 0);
         const resImagesBody = await resImages.json();
         if(!resImages.ok)  return console.log(resImagesBody.message);
 
@@ -41,8 +41,8 @@ function ProfilePhotos() {
                             <i className="gg-chevron-left"></i>
                             Вернуться назад
                         </Button>
-                        <div className="photos__title title">
-                            <span className="title__text">Фотографии {`${specialist.user.lastName} ${specialist.user.firstName} ${specialist.user.middleName}`}</span>
+                        <div className="photos__head">
+                            <span className="title__text title">Фотографии {`${specialist.user.lastName} ${specialist.user.firstName} ${specialist.user.middleName}`}</span>
                         </div>
                         <div className="photos__body">
                             <Fancybox options={{ infinite: true }}>

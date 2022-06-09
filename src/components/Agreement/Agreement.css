@@ -1,0 +1,15 @@
+.agreement__checkbox,
+.agreement__label {
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.agreement__checkbox {
+    margin: 0 15px 0 0;
+}
+
+.agreement__link {
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: 16px;
+}

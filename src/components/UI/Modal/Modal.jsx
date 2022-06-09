@@ -13,6 +13,7 @@ function Modal({isVisible, title, setIsVisible, children}) {
         div.remove();
 
         if(isVisible) {
+            document.documentElement.style.overflowY = "hidden";
             body.style.overflow = "hidden";
 
             body.style.paddingRight = scrollSize + "px";
@@ -22,6 +23,7 @@ function Modal({isVisible, title, setIsVisible, children}) {
             }
         } else {
             body.style.overflow = "auto";
+            document.documentElement.style.overflowY= "scroll";
 
             body.style.paddingRight = 0;
             header.style.paddingRight = 0;

@@ -31,3 +31,7 @@
 .profile-comments__addComment {
     margin: 0 0 15px 0;
 }
+
+.profile-comments__sort {
+    margin: 15px 0;
+}

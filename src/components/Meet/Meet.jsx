@@ -11,17 +11,20 @@ function Meet() {
                         Заглушка
                     </div>
                     <div className="card__item card__item-1">
-                        Привет
+                        Cервис поиска специалистов
                     </div>
                     <div className="card__item card__item-2">
-                        Пока
+                        Найдите специалиста для своей задачи
                     </div>
                 </div>
             </Slide>
             <Slide>
-                <div className="how">
-                    <div className="how__fake">
+                <div className="card" style={{backgroundColor: "#6699FF"}}>
+                    <div className="card__item card__item-0">
                         Заглушка
+                    </div>
+                    <div className="card__item" style={{textAlign: "center"}}>
+                        Здесь могла бы быть ваша реклама
                     </div>
                 </div>
             </Slide>

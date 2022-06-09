@@ -17,6 +17,9 @@ function ProfileServices({className, services}) {
                             </div>
                             <div className="ProfileServices__price">
                                 {service.price}
+                                <span className="ProfileServices__unit">
+                                    {service.unit}
+                                </span>
                             </div>
                         </div>
                     );

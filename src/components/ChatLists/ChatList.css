@@ -1,0 +1,39 @@
+.ChatLists {
+    display: flex;
+    flex-direction: column;
+}
+
+.ChatList__Item {
+    position: relative;
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.ChatList__Item:hover {
+    background-color: var(--c-bg);
+}
+
+.ChatList__Item::after {
+    content: '';
+    display: inline-block;
+    height: 1px;
+    width: 280px;
+    background-color: var(--c-bg);
+    position: absolute;
+    left: 10px;
+    bottom: 0;
+}
+
+.ChatList__avatar {
+    width: 40px;
+    height: 40px;
+}
+
+.ChatList__avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

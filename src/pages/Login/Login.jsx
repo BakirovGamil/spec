@@ -6,6 +6,9 @@ import { Link, useNavigate } from "react-router-dom";
 import useFetching from "../../hooks/useFetching";
 import useAuthUser from "../../hooks/useAuthUser";
 import AuthorizationService from "../../API/AuthorizarizationService"; 
+import { toast } from "react-toastify";
+import useAuthSpecialist from "../../hooks/useAuthSpecialist";
+import SpecialistService from "../../API/SpecialistService";
 
 const initUser = {
     login: "",
@@ -15,18 +18,30 @@ const initUser = {
 function Login() {
     const [user, setUser] = useState(initUser);
     const [authUser, setAuthUser] = useAuthUser();
+    const [authSpecialist, setAuthSpecialist] = useAuthSpecialist();
     const navigator = useNavigate();
+
     const [isLoadingAuth, fethAuth, errorAuth] = useFetching(async () => {
+        const loader = toast.loading("Авторизация...");
+
         const res = await AuthorizationService.login(user);
         const resUser = await res.json();
 
         if(res.ok) {
             setAuthUser(resUser.body);
             navigator("/");
-            console.log(resUser.message);
-            console.log(resUser.body);
+            const resAuthSpecialist = await SpecialistService.getCurrentSpecialist();
+            const resAuthSpecialistBody = await resAuthSpecialist.json();
+
+            if(resAuthSpecialist.ok) {
+                setAuthSpecialist(resAuthSpecialistBody);
+            } else {
+                console.log(resAuthSpecialistBody.message);
+            }
+            
+            toast.update(loader, { render: resUser.message, type: "success", isLoading: false, delay: 10, autoClose: null, pauseOnHover: null});
         } else {
-            console.log(resUser.message);
+            toast.update(loader, { render: resUser.message, type: "error", isLoading: false, delay: 10, autoClose: null, pauseOnHover: null});
         }
     });
 
@@ -78,7 +93,7 @@ function Login() {
                             </div>
                             <div className="authorization__item authorization__actions">
                                 <Link to="/authorization" className="authorization__link">Регистрация</Link>
-                                <Button className="authorization__button" onClick={logIn}>Войти</Button>
+                                <Button className="authorization__button" onClick={logIn} disabled={isLoadingAuth}>Войти</Button>
                             </div>
                         </div>
                     </div>

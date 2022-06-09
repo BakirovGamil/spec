@@ -6,6 +6,9 @@ import DropDown from "../UI/DropDown/DropDown";
 import { Link } from "react-router-dom";
 import useAuthUser from "../../hooks/useAuthUser";
 import AuthorizationService from "../../API/AuthorizarizationService";
+import useAuthSpecialist from "../../hooks/useAuthSpecialist";
+import { toast } from "react-toastify";
+import useFavorite from "../../hooks/useFavorite";
 
 function getFullHeightOfDocument() {
     return Math.max(
@@ -19,6 +22,8 @@ function Header() {
     const headerRef = createRef();
     const fakeHeaderRef = createRef();
     const [authUser, setAuthUser] = useAuthUser();
+    const [authSpecialist, setAuthSpecialist] = useAuthSpecialist();
+    const [favorites, setFavorites, isVisibleFavorites, setIsVisibleFavorites] = useFavorite();
 
     useEffect(() => {
         const header = headerRef.current;
@@ -39,11 +44,14 @@ function Header() {
         let prevScroll = window.pageYOffset;
         function changeHeaderVisibility() {
             const currentScroll = window.pageYOffset;
-            if(currentScroll >= getFullHeightOfDocument() - document.documentElement.clientHeight - 100) return;  //Если вышли за документ (На мобильных устройствах можно)
+            if(currentScroll >= getFullHeightOfDocument() - document.documentElement.clientHeight - 50) return;  //Если вышли за документ (На мобильных устройствах можно)
             
-            if(currentScroll <= 100) return; //Чтобы алгоритм скрытия работал после 40 пикселей
-
             const checkIsHidden = () => header.classList.contains("header_hidden");
+            if(currentScroll <= 100) {
+                if(checkIsHidden())  header.classList.remove("header_hidden");
+                return;
+            }; //Чтобы алгоритм скрытия работал после 100 пикселей
+
 
             if(currentScroll > prevScroll && !checkIsHidden()) {  // При прокрутке вниз
                 header.classList.add("header_hidden");
@@ -67,12 +75,20 @@ function Header() {
         }
     }, []);
 
-    const logout = async function () {
+    async function logout(e) {
+        e.preventDefault();
+
+        const loader = toast.loading("Выход...");
+
         const resAuth = await AuthorizationService.logout();
 
-        if(!resAuth.ok) return console.log("Что-то пошло не так!");
+        if(!resAuth.ok) return toast.update(loader, { render: "Что-то пошло не так", type: "error", isLoading: false, delay: 10, autoClose: null, pauseOnHover: null});
 
         setAuthUser(null);
+        setAuthSpecialist(null);
+        setFavorites([]);
+
+        toast.update(loader, { render: "Вы вышли из аккаунта", type: "success", isLoading: false, delay: 10, autoClose: null, pauseOnHover: null});
     }
 
     return (<>
@@ -92,16 +108,42 @@ function Header() {
                                 </DropDown>  
                             }
                             {
-                                authUser && 
-                                <DropDown placeholder={<i className="gg-enter"></i>} classNameButton="nav__action" classNameContent="nav__dropdown">
+                                authUser && authUser.role === "user" && 
+                                <DropDown placeholder={<i className="gg-menu"></i>} classNameButton="nav__action" classNameContent="nav__dropdown">
+                                    <Link to={`/messages/0`}>Сообщения</Link>
+                                    <a  href="#1" onClick={() => setIsVisibleFavorites(true)}>
+                                        Избранные
+                                    </a>
                                     <Link to="/specialist/registration">Стать специалистом</Link>
-                                    <a 
-                                        href="#" 
-                                        onClick={(e) => {
-                                            e.preventDefault(); 
-                                            logout();
-                                        }
-                                    }>
+                                    <a  href="#2" onClick={logout}>
+                                        Выйти
+                                    </a>
+                                </DropDown>  
+                            }
+                            {
+                                authUser && authUser.role === "specialist" && 
+                                <DropDown placeholder={<i className="gg-menu"></i>} classNameButton="nav__action" classNameContent="nav__dropdown">
+                                    <Link to={`/profile/${authSpecialist?.id}`}>Мои профиль</Link>
+                                    <Link to={`/messages/0`}>Сообщения</Link>
+                                    <Link to="/specialist/gallery">Мои фотографии</Link>
+                                    <Link to="/specialist/profile">Редактировать</Link>
+                                    <a  href="#1" onClick={() => setIsVisibleFavorites(true)}>
+                                        Избранные
+                                    </a>
+                                    <a  href="#2" onClick={logout}>
+                                        Выйти
+                                    </a>
+                                </DropDown>  
+                            }
+                            {
+                                authUser && authUser.role === "admin" && 
+                                <DropDown placeholder={<i className="gg-menu"></i>} classNameButton="nav__action" classNameContent="nav__dropdown">
+                                    <Link to={`/moderation`}>Модерация</Link>
+                                    <Link to={`/messages/0`}>Сообщения</Link>
+                                    <a  href="#1" onClick={() => setIsVisibleFavorites(true)}>
+                                        Избранные
+                                    </a>
+                                    <a  href="#2" onClick={logout}>
                                         Выйти
                                     </a>
                                 </DropDown>  

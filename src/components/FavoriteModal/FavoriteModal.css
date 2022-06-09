@@ -1,0 +1,25 @@
+.favorite {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 400px;
+}
+
+.favorite__specialist {
+    display: flex;
+    gap: 20px;
+    background-color: var(--c-bg-2);
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.favorite__left {
+    flex: 1 1 auto;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.favorite__name {
+    text-indent: 5px;
+}

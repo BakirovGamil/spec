@@ -7,6 +7,8 @@ import AuthorizationListItem from "./AuthorizationListItem";
 import { Link, useNavigate } from "react-router-dom";
 import AuthorizationService from "../../API/AuthorizarizationService";
 import useFetching from "../../hooks/useFetching";
+import Agreement from "../../components/Agreement/Agreement";
+import { toast } from "react-toastify";
 
 const initUser = {
     lastName: "",
@@ -26,6 +28,8 @@ function Authorization() {
     });
     const navigator = useNavigate();
     const [isLoadingRegistration, fethRegistration, errorRegistration] = useFetching(async () => {
+        const loader = toast.loading("Регистрация...");
+
         const res = await AuthorizationService.registration(user);
         const resMessage = await res.json();
 
@@ -33,10 +37,13 @@ function Authorization() {
             navigator("/login");
             console.log(resMessage.message);
             console.log(resMessage.body);
+            toast.update(loader, { render: resMessage.message, type: "success", isLoading: false, delay: 10, autoClose: null, pauseOnHover: null});
         } else {
             console.log(resMessage.message);
+            toast.update(loader, { render: resMessage.message, type: "error", isLoading: false, delay: 10, autoClose: null, pauseOnHover: null});
         }
     });
+    const [isAgree, setIsAgree] = useState(false);
     
     const handleChange = (e, prop) => {
         const regExp =  /[а-яА-ЯёЁ-]/g;
@@ -88,7 +95,10 @@ function Authorization() {
         if(user.phoneNumber === "") setUser({...user, phoneNumber: "+7"});
     };
 
-    async function registration() {
+    async function registration(e) {
+        e.preventDefault();
+        if(isLoadingRegistration) return;
+        if(!isAgree) return toast.warn("Необходимо прочитать соглашение об обработке персональных данных");
         await fethRegistration();
 
         if(errorRegistration) {
@@ -102,7 +112,7 @@ function Authorization() {
             <div className="authorization">
                 <div className="container">
                     <div className="authorization__container">
-                        <div className="authorization__form">
+                        <form className="authorization__form" onSubmit={registration}>
                             <div className="authorization__item authorization__title">
                                 <span>Регистрация</span>
                             </div>
@@ -140,11 +150,12 @@ function Authorization() {
                             <div className="authorization__item">
                                 <Input type="tel" placeholder="Телефон (+7)" value={user.phoneNumber} onChange={handleChangePhoneNumber} onFocus={handleFocusPhoneNumber} required/>
                             </div>
+                            <Agreement isAgree={isAgree} setIsAgree={setIsAgree} className="authorization__item authorization__isAgree"/>
                             <div className="authorization__item authorization__actions">
                                 <Link to="/login" className="authorization__link">Вход</Link>
-                                <Button className="authorization__button" onClick={registration}>Создать аккаунт</Button>
+                                <Button className="authorization__button">Создать аккаунт</Button>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>

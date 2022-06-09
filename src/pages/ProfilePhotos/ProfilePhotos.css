@@ -1,4 +1,4 @@
-.photos__title {
+.photos__head {
     padding: 10px 0;
     margin: 0 0 20px 0;
     text-align: center;
@@ -17,6 +17,7 @@
 .photos__img {
     width: 100%;
     height: 100%;
+    max-width: 300px;
 }
 
 .photos__img img{

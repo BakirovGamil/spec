@@ -16,6 +16,8 @@
     color: var(--c-t);
     background-color: var(--c-bg-2);
     margin: 0 7px 0 0;
+    opacity: 1;
+    border: none;
 }
 
 .ServiceList__input:last-child {

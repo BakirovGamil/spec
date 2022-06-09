@@ -1,22 +1,26 @@
 import './null.css';
 import './main.css';
-import { Route, Routes } from 'react-router-dom';
-import Meet from './pages/Meet/Meet'
+import { Route, Routes} from 'react-router-dom';
 import { createContext, createRef, useEffect, useState } from 'react';
-import Main from './pages/Main';
-import Authorization from './pages/Authorization/Authorization';
-import Login from './pages/Login/Login';
-import ProfileId from './pages/ProfileId/ProfileId';
-import ProfilePhotos from './pages/ProfilePhotos/ProfilePhotos';
-import ProfileComments from './pages/ProfileComments/ProfileComments';
-import SpecialistRegistration from './pages/SpecialistRegistration/SpecialistRegistration';
 import AuthorizationService from './API/AuthorizarizationService';
 import useFetching from './hooks/useFetching';
+import {toast, ToastContainer} from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+import SpecialistService from './API/SpecialistService';
+import FavoriteService from './API/FavoriteService';
+import FavoriteModal from './components/FavoriteModal/FavoriteModal';
+import { publicRoutes, userRoutes, specialistRoutes, adminRoutes } from './routes/routes';
+import Cookie from './components/Cookie/Cookie';
 
 export const UserContext = createContext(null);
+export const SpecialistContext = createContext(null);
+export const FavoriteContext = createContext([]);
 
 function App() {
 	const [authUser, setAuthUser] = useState(null);
+	const [authSpecialist, setAuthSpecialist] = useState(null);
+	const [favorites, setFavorites] = useState([]);
+	const [isVisibleFavorites, setIsVisibleFavorites] = useState(false);
 	const wrapperRef = createRef();
 
 	const [isLoadingAuth, fethAuth, errorAuth] = useFetching(async () => {
@@ -25,8 +29,26 @@ function App() {
 		
 		if(resAuthUser.ok) {
 			setAuthUser(authUser);
+			const resFavorite = await FavoriteService.getByUserId(authUser.id);
+			const resFavoriteBody = await resFavorite.json();
+
+			if(resFavorite.ok) {
+				setFavorites(resFavoriteBody);
+				console.log(resFavoriteBody);
+			} else {
+				toast.error("Что-то пошло не так! Попробуйте перезагрузить страницу");
+			}
 		} else {
 			console.log(authUser.message);
+		}
+
+		const resAuthSpecialist = await SpecialistService.getCurrentSpecialist();
+		const resAuthSpecialistBody = await resAuthSpecialist.json();
+
+		if(resAuthSpecialist.ok) {
+			setAuthSpecialist(resAuthSpecialistBody);
+		} else {
+			console.log(resAuthSpecialistBody.message);
 		}
 	});
 
@@ -45,20 +67,52 @@ function App() {
 	}, []);
 
 	return (
+		<FavoriteContext.Provider value={[favorites, setFavorites, isVisibleFavorites, setIsVisibleFavorites]}>
 		<UserContext.Provider value={[authUser, setAuthUser]}>
-			<div className='wrapper' ref={wrapperRef}>
-				<Routes>
-					<Route path='/' element={<Main />} />
-					<Route path='meet' element={<Meet />} />
-					<Route path='authorization' element={<Authorization />} />
-					<Route path='login' element={<Login />} />
-					<Route path='profile/:specialistId' element={<ProfileId />} />
-					<Route path='profile/photos/:specialistId' element={<ProfilePhotos />} />
-					<Route path='profile/comments/:specialistId' element={<ProfileComments />} />
-					<Route path='specialist/registration' element={<SpecialistRegistration />} />
-				</Routes>
-			</div>
+			<SpecialistContext.Provider value={[authSpecialist, setAuthSpecialist]}>
+				<div className='wrapper' ref={wrapperRef}>
+					<Routes>
+						{publicRoutes.map(route => {
+							return (
+								<Route key={route.path} path={route.path} element={route.element} />
+							);
+						})}
+						{
+							authUser?.role === "user" &&
+							userRoutes.map(route => {
+								return (
+									<Route key={route.path} path={route.path} element={route.element} />
+								);
+							})
+						}
+						{	
+							authUser?.role === "specialist" &&
+							specialistRoutes.map(route => {
+								return (
+									<Route key={route.path} path={route.path} element={route.element} />
+								);
+							})
+						}
+						{	
+							authUser?.role === "admin" &&
+							adminRoutes.map(route => {
+								return (
+									<Route key={route.path} path={route.path} element={route.element} />
+								);
+							})
+						}
+					</Routes>
+					<ToastContainer
+						style={{fontSize: 15}}
+						autoClose={3000}
+						theme={localStorage.getItem("theme") || "dark"}
+					/>
+				</div>
+				<FavoriteModal favorites={favorites} setFavorites={setFavorites} isVisible={isVisibleFavorites} setIsVisible={setIsVisibleFavorites}/>
+				<Cookie/>
+			</SpecialistContext.Provider>
 		</UserContext.Provider>
+		</FavoriteContext.Provider>
 	);
 }
 

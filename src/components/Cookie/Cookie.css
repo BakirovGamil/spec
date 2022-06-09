@@ -1,0 +1,28 @@
+.cookie {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    padding: 15px;
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    background-color: var(--c-bg-3);
+    border-radius: 5px;
+    width: 400px;
+    border: 1px solid var(--c-bg-2);
+}
+
+.cookie__body {
+    font-size: 13px;
+    line-height: 15px;
+}
+
+.cookie__btn {
+    font-size: 18px;
+    line-height: 20px;
+}
+
+.cookie__link {
+    cursor: pointer;
+    text-decoration: underline;
+}

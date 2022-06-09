@@ -10,6 +10,7 @@ import Comments from "../../components/ProfileComments/ProfileComments";
 import "./ProfileComments.css";
 import ProfileInfo from "../../components/ProfileInfo/ProfileInfo";
 import ImageService from "../../API/ImageService";
+import useFilterSortComments from "../../hooks/useFilterSortComments";
 
 function ProfileComments() {
     const {specialistId} = useParams();
@@ -24,14 +25,9 @@ function ProfileComments() {
         2: false,
         1: false
     });
+    const [sort, setSort] = useState({field: "date", order: 0})
 
-    const filteredComments = useMemo(() => {
-        if(!comments) return comments;
-
-        if(Object.values(filter).every(filter => filter === false)) return comments;
-        
-        return comments.filter(comment => filter[comment.rating]);
-    }, [filter, comments]);
+    const sortedAndFilteredComments = useFilterSortComments(comments, filter, sort);
 
     const [isLoading, fetch, error] = useFetching(async () => {
         const resSpecialist = await SpecialistService.getById(specialistId);
@@ -65,7 +61,6 @@ function ProfileComments() {
         fetch();
     }, []);
 
-
     return (<>
         <Header/>
         <main>
@@ -81,11 +76,11 @@ function ProfileComments() {
                             <span className="title__text">Отзывы {`${specialist.user.lastName} ${specialist.user.firstName} ${specialist.user.middleName}`}</span>
                         </div>
                         
-                        <ProfileInfo className="comments__profile" commentsStats={commentsStats} specialist={specialist} comments={comments}/>
+                        <ProfileInfo className="comments__profile" commentsStats={commentsStats} specialist={specialist} setSpecialist={setSpecialist} comments={comments}/>
 
                         <div className="comments__body">
                             <div className="comments__leftCol">
-                                <Comments comments={filteredComments} commentsStats={commentsStats}/>
+                                <Comments comments={sortedAndFilteredComments} commentsStats={commentsStats} isSort sort={sort} setSort={setSort}/>
                             </div>
                             <div className="comments__rightCol">
                                 <CommentsStatistics className="comments__statistics" filter={filter} setFilter={setFilter} comments={comments}/>

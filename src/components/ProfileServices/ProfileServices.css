@@ -14,3 +14,9 @@
 .ProfileServices__service:last-child {
     margin: 0;
 }
+
+.ProfileServices__unit {
+    display: inline-block;
+    width: 100px;
+    padding: 0 0 0 15px;
+}

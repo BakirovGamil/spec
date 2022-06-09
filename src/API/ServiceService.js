@@ -7,14 +7,40 @@ export default class ServiceService {
         return response;
     }
 
-    //{name, price}
+    //{name, price, unit}
     static async add(dataObject) {
-        const response = await fetch(apiPath + `registration`, {
+        const response = await fetch(apiPath + `add`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json;charset=utf-8'
             },
             body: JSON.stringify(dataObject)
+        });
+
+        return response;
+    }
+
+    //{id, name, price, unit}
+    static async updateById(dataObject) {
+        const response = await fetch(apiPath + `update`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(dataObject)
+        });
+
+        return response;
+    }
+
+    //{id}
+    static async deleteById(id) {
+        const response = await fetch(apiPath + `delete`, {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify({id})
         });
 
         return response;

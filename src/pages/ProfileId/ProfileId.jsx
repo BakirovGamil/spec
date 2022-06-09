@@ -11,6 +11,7 @@ import SpecialistService from "../../API/SpecialistService";
 import ServiceService from "../../API/ServiceService";
 import ImageService from "../../API/ImageService";
 import CommentService from "../../API/CommentService";
+import Loader from "../../components/UI/Loader/Loader";
 
 function Profile() {
     const {specialistId} = useParams();
@@ -63,11 +64,12 @@ function Profile() {
 
     useEffect(() => {
         fetchSpecialist();
-    }, []);
+    }, [specialistId]);
 
     return (<>
         <Header/>
         <main>
+            {isSpecialistLoading && <Loader/>}
             {   specialist &&
                 <div className="profile">
                     <div className="container">
@@ -83,7 +85,7 @@ function Profile() {
                         
                             <div className="profile__content">
                                 <div id="profile"></div>
-                                <ProfileInfo specialist={specialist} comments={comments} commentsStats={commentsStats} className="profile-section"/>
+                                <ProfileInfo specialist={specialist} setSpecialist={setSpecialist} comments={comments} commentsStats={commentsStats} className="profile-section"/>
 
                                 {
                                     !!specialist.images.length && <>

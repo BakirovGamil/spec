@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import CommentService from "../../API/CommentService";
+import useAuthSpecialist from "../../hooks/useAuthSpecialist";
 import useAuthUser from "../../hooks/useAuthUser";
 import useFetching from "../../hooks/useFetching";
 import AuthorizationModal from "../AuthorizationModal/AuthorizationModal";
 import EditComment from "../EditComment/EditComment";
 import Rating from "../Rating/Rating";
 import Button from "../UI/Button/Button";
-import Input from "../UI/Input/Input";
-import Modal from "../UI/Modal/Modal";
 import "./AddComment.css";
 
 // const initComment = {
@@ -30,10 +30,11 @@ import "./AddComment.css";
 //     "date": "Wed Jun 01 2022"
 // }
 
-function AddComment({specialistId, className}) {
+function AddComment({specialistId, className, setComments, comments}) {
     const classNameFull = className ? ["addComment", className].join(" ") : "addComment";
 
     const [authUser, setAuthUser] = useAuthUser();
+    const [authSpecialist, setAuthSpecialist] = useAuthSpecialist();
     const [isVisibleAuthorization, setIsVisibleAuthorization] = useState(false);
     const [currentComment, setCurrentComment] = useState(null);
     const [isEdit, setIsEdit] = useState(false);
@@ -43,7 +44,6 @@ function AddComment({specialistId, className}) {
         rating: 0,
         data: ""
     });
-
 
     const [isLoadingCurrentComment, fetchCurrentComment, errorCurrentComment] = useFetching(async () => {
         const resCurrentComment = await CommentService.getCommentForUser(specialistId);
@@ -60,7 +60,7 @@ function AddComment({specialistId, className}) {
 
     useEffect(() => {
         fetchCurrentComment();
-    }, [authUser]);
+    }, [authUser, specialistId]);
 
     function handleChangeData(e) {
         setComment({...comment, data: e.target.value});
@@ -76,40 +76,46 @@ function AddComment({specialistId, className}) {
     async function handleSend() {
         if(!authUser) return setIsVisibleAuthorization(true);
 
+        const loader = toast.loading("Сохранение отзыва...");
         const resComment = await CommentService.addComment(comment);
         const resCommentBody = await resComment.json();
 
         if(resComment.ok) {
             console.log(resCommentBody);
             setCurrentComment(resCommentBody);
+            toast.update(loader, { render: "Отзыв успешно добавлен", type: "success", isLoading: false, delay: 10, autoClose: null, pauseOnHover: null});
         } else {
             console.log(resCommentBody.message);
+            toast.update(loader, { render: resCommentBody.message, type: "error", isLoading: false, delay: 10, autoClose: null, pauseOnHover: null});
         }
     }
 
-    return (
-        <div className={classNameFull}>
-            {
-                !currentComment && <>
-                <div className="addComment__ratingContainer">
-                    <span className="addComment__text">Общая оценка : </span>
-                    <Rating className="addComment__rating" name="rating" onClick={handleChangeRating} value={comment.rating}/>
-                </div>
-                <div className="addComment__send">
-                    <textarea placeholder="Очень пунктуальный специалист..." className="addComment__textArea" value={comment.data} onChange={handleChangeData}></textarea>
-                    <Button onClick={handleSend} isBackground>
-                        Оставить отзыв
-                    </Button>
-                </div>
-                </>
-            }
-            {
-                !!currentComment && 
-                <EditComment currentComment={currentComment} setCurrentComment={setCurrentComment} isEdit={isEdit} setIsEdit={setIsEdit}/>
-            }
-            <AuthorizationModal  isVisible={isVisibleAuthorization} setIsVisible={setIsVisibleAuthorization}/>
-        </div>
-    );
+
+    return (<>
+        {   authSpecialist?.id !== specialistId &&
+            <div className={classNameFull}>
+                {
+                    !currentComment && <>
+                    <div className="addComment__ratingContainer">
+                        <span className="addComment__text">Общая оценка : </span>
+                        <Rating className="addComment__rating" name="rating" onClick={handleChangeRating} value={comment.rating}/>
+                    </div>
+                    <div className="addComment__send">
+                        <textarea placeholder="Очень пунктуальный специалист..." className="addComment__textArea" value={comment.data} onChange={handleChangeData}></textarea>
+                        <Button onClick={handleSend} isBackground>
+                            Оставить отзыв
+                        </Button>
+                    </div>
+                    </>
+                }
+                {
+                    !!currentComment && 
+                    <EditComment currentComment={currentComment} setCurrentComment={setCurrentComment} isEdit={isEdit} setIsEdit={setIsEdit}/>
+                }
+                <AuthorizationModal  isVisible={isVisibleAuthorization} setIsVisible={setIsVisibleAuthorization}/>
+            </div>
+        }
+    </>);
 }
 
 export default AddComment;
