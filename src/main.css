@@ -98,8 +98,10 @@ html, body, #root, .wrapper {
 .subscriptions__body {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 23px;
+  min-height: 200px;
+  position: relative;
 }
 
 .title {
@@ -134,4 +136,8 @@ html, body, #root, .wrapper {
 
 .aboutService {
   margin: 0 0 40px 0;
+}
+
+.subscriptions {
+  margin: 0 0 30px 0;
 }

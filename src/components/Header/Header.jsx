@@ -111,6 +111,7 @@ function Header() {
                                 authUser && authUser.role === "user" && 
                                 <DropDown placeholder={<i className="gg-menu"></i>} classNameButton="nav__action" classNameContent="nav__dropdown">
                                     <Link to={`/messages/0`}>Сообщения</Link>
+                                    <Link to="/subscriptions">Мои подписки</Link>
                                     <a  href="#1" onClick={() => setIsVisibleFavorites(true)}>
                                         Избранные
                                     </a>
@@ -125,7 +126,9 @@ function Header() {
                                 <DropDown placeholder={<i className="gg-menu"></i>} classNameButton="nav__action" classNameContent="nav__dropdown">
                                     <Link to={`/profile/${authSpecialist?.id}`}>Мои профиль</Link>
                                     <Link to={`/messages/0`}>Сообщения</Link>
+                                    <Link to="/orders">Заказы</Link>
                                     <Link to="/specialist/gallery">Мои фотографии</Link>
+                                    <Link to="/subscriptions">Мои подписки</Link>
                                     <Link to="/specialist/profile">Редактировать</Link>
                                     <a  href="#1" onClick={() => setIsVisibleFavorites(true)}>
                                         Избранные

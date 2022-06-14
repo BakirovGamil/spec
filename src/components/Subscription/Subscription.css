@@ -12,6 +12,7 @@
   height: 410px;
   padding: 34px 20px 20px;
   line-height: 32px;
+  position: relative;
 }
 
 .subscription__title {
@@ -34,6 +35,7 @@
   color: transparent;
   border-radius: 30px;
   font-size: 15px;
+  position: relative;
 }
 
 .subscription__button:hover {

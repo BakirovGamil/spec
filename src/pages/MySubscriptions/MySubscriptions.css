@@ -1,0 +1,15 @@
+.MySubscriptions {
+    padding: 30px 0 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.MySubscriptions__body {
+    justify-content: center;
+}
+
+.MySubscriptions__notify {
+    text-align: center;
+    width: 100%;
+}

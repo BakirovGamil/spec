@@ -1,0 +1,11 @@
+.linkSpecialist {
+    padding: 10px 0 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+}
+
+.linkSpecialist__tInput {
+    margin: 0 0 17px 0;
+}

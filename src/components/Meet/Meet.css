@@ -7,7 +7,7 @@
 }
 
 .card {
-    background-color: pink;
+    background-color: var(--c-bg-3);
     padding: 30px 10px 40px 10px;
     position: relative;
 }

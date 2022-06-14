@@ -11,6 +11,9 @@ import SpecialistGallery from "../pages/SpecialistGallery/SpecialistGallery";
 import SpecialistProfile from "../pages/SpecialistProfile/SpecialistProfile";
 import SpecialistRegistration from "../pages/SpecialistRegistration/SpecialistRegistration";
 import Moderation from "../pages/Moderation/Moderation";
+import MySubscriptions from "../pages/MySubscriptions/MySubscriptions";
+import Orders from "../pages/Orders/Orders";
+import MainSubscriptions from "../pages/MainSubscriptions/MainSubscriptions";
 
 export const publicRoutes = [
     {path: "*", element: <NotFound/>},
@@ -21,18 +24,22 @@ export const publicRoutes = [
     {path: 'authorization', element: <Authorization />},
     {path: 'login', element: <Login />},
     {path: 'search', element: <Finder />},
-    {path: 'search/:query', element: <Finder />}
+    {path: 'search/:query', element: <Finder />},
+    {path: 'mainsubs', element: <MainSubscriptions />}
 ];
 
 export const userRoutes = [
     {path: 'messages/:userId', element: <Messages />},
     {path: 'specialist/registration', element: <SpecialistRegistration />},
+    {path: 'subscriptions', element: <MySubscriptions />}
 ];
 
 export const specialistRoutes = [
     {path: 'messages/:userId', element: <Messages />},
     {path: 'specialist/profile', element: <SpecialistProfile />},
     {path: 'specialist/gallery', element: <SpecialistGallery />},
+    {path: 'subscriptions', element: <MySubscriptions />},
+    {path: 'orders', element: <Orders />}
 ]
 
 export const adminRoutes = [

@@ -1,8 +1,8 @@
 import "./Loader.css";
 
-function Loader() {
+function Loader({backgroundColor}) {
     return (
-        <div class="loading-spinner"></div>
+        <div className="loading-spinner" style={backgroundColor ? {backgroundColor} : {}}></div>
     );
 }
 

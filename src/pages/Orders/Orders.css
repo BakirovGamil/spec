@@ -1,0 +1,20 @@
+.Orders {
+    padding: 30px 0 0 0;
+}
+
+.Orders__body {
+    position: relative;
+    min-height: 100px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.Orders__title {
+    margin: 0 0 30px 0;
+}
+
+.Orders__notify {
+    text-align: center;
+    width: 100%;
+}

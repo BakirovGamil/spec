@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Header from "../components/Header/Header";
 import LastComments from "../components/LastComments/LastComments";
 import Meet from "../components/Meet/Meet";
-import Subscription from "../components/Subscription/Subscription";
+import Subscriptions from "../components/Subscriptions/Subscriptions";
 import Button from "../components/UI/Button/Button";
 import Input from "../components/UI/Input/Input";
 
@@ -19,6 +19,7 @@ function Main() {
         <main className="main">
             <div className="container">
                 <Meet/>
+                <Link to="mainsubs">Страница подписок</Link>
             </div>
             <div className="search">
                 <div className="container">
@@ -47,23 +48,10 @@ function Main() {
                     </div>
                 </div>
             </div>
-           <LastComments/>
-            <div className="subscriptions">
-                <div className="container">
-                    <div className="subscriptions__title title">
-                        Подписки
-                    </div>
-                    <div className="subscriptions__body">
-                        <Subscription/>
-                        <Subscription/>
-                        <Subscription/>
-                        <Subscription/>
-                        <Subscription/>
-                        <Subscription/>
-                        <Subscription/>
-                    </div>
-                </div>
-            </div>
+
+            <LastComments/>
+
+            <Subscriptions/>    
         </main>
     </>);
 }

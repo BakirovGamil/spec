@@ -1,0 +1,32 @@
+.LinkedSpecialists {
+    padding: 20px 0 0 0;
+    min-height: 100px;
+    min-width: 400px;
+    position: relative;
+}
+
+.LinkedSpecialist__notify {
+    text-align: center;
+    width: 100%;
+}
+
+.LinkedSpecialists__spec {
+    display: flex;
+    gap: 5px;
+}
+
+.LinkedSpecialists__spec > .LastComments__specialist {
+    flex: 1 1 auto;
+}
+
+.LinkedSpecialists__actions {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 5px;
+    height: 100%;
+}
+
+.LinkedSpecialists__btn {
+    font-size: 16px;
+}
